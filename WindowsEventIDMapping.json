@@ -1,0 +1,1473 @@
+{
+    "Account Activity": {
+        "events": {
+            "Account Lockouts": {
+                "4740": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A user account was locked out",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit User Account Management"
+                }
+            },
+            "User Added to Security-enabled Group": {
+                "4728": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A member was added to a security-enabled Global group",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit Security Group Management"
+                },
+                "4732": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A member was added to a security-enabled Local group",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit Security Group Management"
+                },
+                "4756": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A member was added to a security-enabled Universal group",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit Security Group Management"
+                }
+            },
+            "Account Modified": {
+                "4738": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A user account was changed",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit User Account Management"
+                }
+            },
+            "Computer Account Created": {
+                "4741": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A computer account was created",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit Computer Account Management"
+                }
+            },
+            "Computer Account Modified": {
+                "4742": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A computer account was changed",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit Computer Account Management"
+                }
+            },
+            "Computer Account Deleted": {
+                "4743": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A computer account was deleted",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit Computer Account Management"
+                }
+            },
+            "Security-Enabled Local group Changed": {
+                "4735": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A security-enabled Local group was changed",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit Security Group Management"
+                }
+            },
+            "Security-Enabled Global group Changed": {
+                "4737": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A security-enabled Global group was changed",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit Security Group Management"
+                }
+            },
+            "Security-Enabled Universal group Changed": {
+                "4755": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A security-enabled Universal group was changed",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit Security Group Management"
+                }
+            },
+            "Group's Type Changed": {
+                "4764": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A group’s type was changed",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit Security Group Management"
+                }
+            },
+            "Security-Enabled group Enumerated": {
+                "4799": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A security-enabled local group membership was enumerated",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit Security Group Management"
+                }
+            },
+            "Successful User Account Login": {
+                "4624": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "An account was successfully logged on",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Logon/Logoff\\Audit Logon"
+                }
+            },
+            "Failed User Account Login": {
+                "4625": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "An account failed to log on",
+                    "gpo": [
+                        "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Logon/Logoff\\Audit Logon",
+                        "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Logon/Logoff\\Audit Account Lockout"
+                    ]
+                }
+            },
+            "Logoff Event": {
+                "4634": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "Logoff event (terminated)",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Logon/Logoff\\Audit Logoff"
+                }
+            },
+            "User initiated logoff": {
+                "4647": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "User initiated logoff",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Logon/Logoff\\Audit Logoff"
+                }
+            },
+            "Logon with Special Privileges": {
+                "4672": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "Special Privileges assigned to Logon",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Logon/Logoff\\Audit Special Logon"
+                }
+            },
+            "Account Name Changed": {
+                "4781": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "The name of an account was changed",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit User Account Management"
+                }
+            },
+            "Credentials backed up": {
+                "5376": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "Credential Manager credentials were backed up",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit User Account Management"
+                }
+            },
+            "Credentials restored": {
+                "5377": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "Credential Manager credentials were restored from a backup",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit User Account Management"
+                }
+            },
+            "New User Account Created": {
+                "4720": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "New user account created",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit User Account Management"
+                }
+            },
+            "New User Account Enabled": {
+                "4722": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A user account was enabled",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit User Account Management"
+                }
+            },
+            "Change Account Password": {
+                "4723": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "An attempt was made to change an account's password",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit User Account Management"
+                }
+            },
+            "Reset Account Password": {
+                "4724": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "An attempt was made to reset an account's password",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit User Account Management"
+                }
+            },
+            "User Account Unlocked": {
+                "4767": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A user account was unlocked",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit User Account Management"
+                }
+            },
+            "Password Hash Accessed": {
+                "4782": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "The password hash of an account was accessed",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit Other Account Management"
+                }
+            },
+            "User Account Deleted": {
+                "4726": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "User Account Deleted",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit User Account Management"
+                }
+            },
+            "Security-enabled Local Group Created": {
+                "4731": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A security-enabled Local group was created",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit Security Group Management"
+                }
+            },
+            "Security-enabled Global Group Created": {
+                "4727": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A security-enabled Global group was created",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit Security Group Management"
+                }
+            },
+            "Security-enabled Universal Group Created": {
+                "4754": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A security-enabled Universal group was created",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit Security Group Management"
+                }
+            },
+            "User Account Disabled": {
+                "4725": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "User Account Disabled",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit User Account Management"
+                }
+            },
+            "Group membership information": {
+                "4627": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "Group membership information.",
+                    "gpo": [
+                        "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Logon/Logoff\\Audit Logon",
+                        "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Logon/Logoff\\Audit Group Membership"
+                    ]
+                }
+            },
+            "ACL Set on Administrators": {
+                "4780": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "The ACL was set on accounts which are members of administrators groups",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit User Account Management"
+                }
+            },
+            "Directory Services Adm. Password Set": {
+                "4794": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "An attempt was made to set the Directory Services Restore Mode administrator password",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit User Account Management"
+                }
+            },
+            "User Group Membership Enumerated": {
+                "4798": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A user's local group membership was enumerated",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit User Account Management"
+                }
+            },
+            "Account removed from Global Sec. Grp.": {
+                "4729": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "Account removed from Global Security Group",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit Security Group Management"
+                }
+            },
+            "Security-Enabled Global Group Deleted": {
+                "4730": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A security-enabled Global group was deleted",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit Security Group Management"
+                }
+            },
+            "Security-Enabled Local Group Deleted": {
+                "4734": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A security-enabled Local group was deleted",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit Security Group Management"
+                }
+            },
+            "Security-Enabled Universal Group Deleted": {
+                "4758": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A security-enabled Universal group was deleted",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit Security Group Management"
+                }
+            },
+            "Account removed from Local Sec. Grp.": {
+                "4733": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "Account removed from Local Security Group",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit Security Group Management"
+                }
+            },
+            "Account removed from Universal Sec. Grp.": {
+                "4757": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "Account removed from Universal Security Group",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Management\\Audit Security Group Management"
+                }
+            },
+            "Account Login with Explicit Credentials": {
+                "4648": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A logon was attempted using explicit credentials",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Logon/Logoff\\Audit Logon"
+                }
+            },
+            "Kerberos authentication ticket requested": {
+                "4768": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A Kerberos authentication ticket (TGT) was requested",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Logon\\Audit Kerberos Authentication Service"
+                }
+            },
+            "Kerberos service ticket requested": {
+                "4769": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A Kerberos service ticket was requested",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Logon\\Audit Kerberos Service Ticket Operations"
+                }
+            },
+            "Kerberos pre-authentication failed": {
+                "4771": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "Kerberos pre-authentication failed",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Account Logon\\Audit Kerberos Authentication Service"
+                }
+            }
+        }
+    },
+    "Event Log Management": {
+        "events": {
+            "Event Log was Cleared": {
+                "104": {
+                    "level": "Information",
+                    "channel": "System",
+                    "provider": "Microsoft-Windows-EventLog",
+                    "notes": "Event log other than security has been cleared"
+                },
+                "1102": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-EventLog",
+                    "notes": "Security event log cleared"
+                }
+            },
+            "Event Log Service Shutdown": {
+                "1100": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-EventLog",
+                    "notes": "(Security Log) Event Log Service Shutdown"
+                }
+            }
+        }
+    },
+    "External Devices": {
+        "events": {
+            "New External Device": {
+                "6416": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A new external device was recognized by the System",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Detailed Tracking\\Audit PNP Activity"
+                }
+            }
+        }
+    },
+    "Network Activity": {
+        "events": {
+            "TS Session Reconnect": {
+                "4778": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "TS Session Reconnect",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Logon/Logoff\\Audit Other Logon/Logoff Events"
+                }
+            },
+            "TS Session Disconnect": {
+                "4779": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "TS Session Disconnect",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Logon/Logoff\\Audit Other Logon/Logoff Events"
+                }
+            },
+            "Outbound TS Connect Attempt": {
+                "1024": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-TerminalServices-RDPClient/Operational",
+                    "provider": "Microsoft-Windows-TerminalServices-ClientActiveXCore",
+                    "notes": "Outbound TS connection attempt"
+                }
+            },
+            "Wireless 802.1X Auth": {
+                "5632": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "Wireless 802.1X Auth",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Logon/Logoff\\Audit Other Logon/Logoff Events"
+                }
+            },
+            "Replay Attack Detected": {
+                "4649": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A replay attack was detected (KRB_AP_ERR_REPEAT)",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Logon/Logoff\\Audit Other Logon/Logoff Events"
+                }
+            },
+            "BITS Job Resumed": {
+                "1": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Bits-Client/Operational",
+                    "provider": "Microsoft-Windows-Bits-Client",
+                    "notes": "BITS Job has been resumed"
+                }
+            },
+            "BITS New Job": {
+                "3": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Bits-Client/Operational",
+                    "provider": "Microsoft-Windows-Bits-Client",
+                    "notes": "New BITS Job"
+                }
+            },
+            "BITS Job Completion": {
+                "4": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Bits-Client/Operational",
+                    "provider": "Microsoft-Windows-Bits-Client",
+                    "notes": "BITS Job completion"
+                }
+            },
+            "BITS Transfer Started": {
+                "59": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Bits-Client/Operational",
+                    "provider": "Microsoft-Windows-Bits-Client",
+                    "notes": "BITS Job started to transfer file"
+                }
+            },
+            "Address Assigned (DHCPv4)": {
+                "50028": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Dhcp-Client/Operational",
+                    "provider": "Microsoft-Windows-Dhcp-Client",
+                    "notes": "IP address assigned to interface",
+                    "gpo": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\WINEVT\\Channels\\Microsoft-Windows-Dhcp-Client/Operational\\Enabled = 1"
+                }
+            },
+            "Address Assigned (DHCPv6)": {
+                "51039": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-DHCPv6-Client/Operational",
+                    "provider": "Microsoft-Windows-DHCPv6-Client",
+                    "notes": "IP address assigned to interface",
+                    "gpo": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\WINEVT\\Channels\\Microsoft-Windows-Dhcpv6-Client/Operational\\Enabled = 1"
+                }
+            },
+            "DNS Query Completed": {
+                "3008": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-DNS-Client/Operational",
+                    "provider": "Microsoft-Windows-DNS-Client",
+                    "notes": "DNS Client events query completed",
+		    "gpo": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\WINEVT\\Channels\\Microsoft-Windows-DNS-Client/Operational\\Enabled = 1"
+                }
+            }
+        }
+    },
+    "Policy Changes": {
+        "events": {
+            "New Trust for Domain": {
+                "4706": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A new trust was created to a domain.",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Policy Change\\Audit Authentication Policy Change"
+                }
+            },
+            "Domain Policy Changed": {
+                "4739": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "Domain policy changes",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Policy Change\\Audit Authentication Policy Change"
+                }
+            },
+            "Kerberos Policy Changed": {
+                "4713": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "Kerberos policy changes",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Policy Change\\Audit Authentication Policy Change"
+                }
+            },
+            "Audit Policy on Object Changed": {
+                "4715": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "The audit policy (SACL) on an object was changed",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Policy Change\\Audit Audit Policy Change"
+                }
+            },
+            "Trusted Domain Information Modified": {
+                "4716": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "Trusted domain information was modified",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Policy Change\\Audit Authentication Policy Change"
+                }
+            },
+            "Trusted Forest Information Added": {
+                "4865": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A trusted forest information entry was added",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Policy Change\\Audit Authentication Policy Change"
+                }
+            },
+            "Trusted Forest Information Removed": {
+                "4866": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A trusted forest information entry was removed",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Policy Change\\Audit Authentication Policy Change"
+                }
+            },
+            "Trusted Forest Information Modified": {
+                "4867": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A trusted forest information entry was modified",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Policy Change\\Audit Authentication Policy Change"
+                }
+            },
+            "System Security Access Granted": {
+                "4717": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "System security access was granted to an account",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Policy Change\\Audit Authentication Policy Change"
+                }
+            },
+            "System Audit Policy Changed": {
+                "4719": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "System audit policy was changed.",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Policy Change\\Audit Audit Policy Change"
+                }
+            },
+            "Auditing Settings on Global Object Changed": {
+                "4817": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "Auditing settings on object were changed",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Policy Change\\Audit Audit Policy Change"
+                }
+            },
+            "Register Security Event Source": {
+                "4904": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "An attempt was made to register a security event source",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Policy Change\\Audit Audit Policy Change"
+                }
+            },
+            "Unregister Security Event Source": {
+                "4905": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "An attempt was made to unregister a security event source",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Policy Change\\Audit Audit Policy Change"
+                }
+            },
+            "CrashOnAuditFail Value Changed": {
+                "4906": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "The CrashOnAuditFail value has changed",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Policy Change\\Audit Audit Policy Change"
+                }
+            },
+            "Auditing Settings on Object Changed": {
+                "4907": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "Auditing settings on object were changed",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Policy Change\\Audit Audit Policy Change"
+                }
+            },
+            "Special Groups Logon Table Modified": {
+                "4908": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "Special Groups Logon table modified",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Policy Change\\Audit Audit Policy Change"
+                }
+            },
+            "Per User Audit Policy Changed": {
+                "4912": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "Per User Audit Policy was changed",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Policy Change\\Audit Audit Policy Change"
+                }
+            }
+        }
+    },
+    "PowerShell": {
+        "events": {
+            "Script Block Content": {
+                "4104": {
+                    "level": "Verbose, Warning",
+                    "channel": "Microsoft-Windows-PowerShell/Operational",
+                    "provider": "Microsoft-Windows-PowerShell",
+                    "notes": "Execute a Remote Command (Script Block Logging)"
+                }
+            }
+        }
+    },
+    "Privilege Use": {
+        "events": {
+            "Sensitive Privilege Use": {
+                "4673": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A privileged service was called"
+                }
+            }
+        }
+    },
+    "Process Monitoring": {
+        "events": {
+            "AppLocker Block": {
+                "8002": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-AppLocker/EXE and DLL",
+                    "provider": "Microsoft-Windows-AppLocker",
+                    "notes": "Configured to audit process starts."
+                },
+                "8003": {
+                    "level": "Warning",
+                    "channel": "Microsoft-Windows-AppLocker/EXE and DLL",
+                    "provider": "Microsoft-Windows-AppLocker",
+                    "notes": "Executable was allowed to run but would have been blocked in enforcing mode"
+                },
+                "8004": {
+                    "level": "Error",
+                    "channel": "Microsoft-Windows-AppLocker/EXE and DLL",
+                    "provider": "Microsoft-Windows-AppLocker",
+                    "notes": "Executable was prevented from running"
+                }
+            },
+            "Script or Installer ran": {
+                "8005": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-AppLocker/MSI and Script",
+                    "provider": "Microsoft-Windows-AppLocker",
+                    "notes": "Scripts and Installers run"
+                }
+            },
+            "AppLocker Warning": {
+                "8006": {
+                    "level": "Error",
+                    "channel": "Microsoft-Windows-AppLocker/MSI and Script",
+                    "provider": "Microsoft-Windows-AppLocker",
+                    "notes": "File  was allowed to run but would have been blocked in enforcing mode"
+                },
+                "8007": {
+                    "level": "Warning",
+                    "channel": "Microsoft-Windows-AppLocker/MSI and Script",
+                    "provider": "Microsoft-Windows-AppLocker",
+                    "notes": "File was prevented from running"
+                }
+            },
+            "Application Ran": {
+                "8020": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-AppLocker/Packaged app-Execution",
+                    "provider": "Microsoft-Windows-AppLocker",
+                    "notes": "Modern app run"
+                }
+            },
+            "Application Installed": {
+                "8023": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-AppLocker/Packaged app-Deployment",
+                    "provider": "Microsoft-Windows-AppLocker",
+                    "notes": "Modern app install"
+                }
+            },
+            "SRP Block": {
+                "865, 866, 867, 868, 882": {
+                    "level": "Warning",
+                    "channel": "Application",
+                    "provider": "Microsoft-Windows-SoftwareRestrictionPolicies",
+                    "notes": "Software Restriction Policies"
+                }
+            },
+            "Process Created": {
+                "4688": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "Process Created",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Detailed Tracking\\Audit Process Creation"
+                }
+            },
+            "Process Terminated": {
+                "4689": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "Process Terminated",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Detailed Tracking\\Audit Process Termination"
+                }
+            }
+        }
+    },
+    "Object Access": {
+        "events": {
+            "Registry Value Modified": {
+                "4657": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A registry value was modified",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Object Access\\Audit Registry"
+                }
+            },
+            "Attempt to Access an Object": {
+                "4663": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "An attempt was made to access an object",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Object Access\\Audit Kernel Object"
+                }
+            },
+            "Network Share Access": {
+                "5140": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A network share object was accessed",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Object Access\\Audit File Share"
+                }
+            },
+            "Network Share Created": {
+                "5142": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A network share object was added",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Object Access\\Audit File Share"
+                }
+            }
+        }
+    },
+    "Scheduled Tasks": {
+        "events": {
+            "Task Launched": {
+                "200": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-TaskScheduler/Operational",
+                    "provider": "Microsoft-Windows-TaskScheduler",
+                    "notes": "Task Launched"
+                }
+            },
+            "Task Finished Successfully": {
+                "201": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-TaskScheduler/Operational",
+                    "provider": "Microsoft-Windows-TaskScheduler",
+                    "notes": "Task Scheduler successfully completed task"
+                }
+            },
+            "Scheduled Tasks Created": {
+                "4698": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A scheduled task was created",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Object Access\\Audit Other Object Access Events"
+                }
+            },
+            "Scheduled Tasks Deleted": {
+                "4699": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A scheduled task was deleted",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Object Access\\Audit Other Object Access Events"
+                }
+            },
+            "Scheduled Tasks Enabled": {
+                "4700": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A scheduled task was enabled",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Object Access\\Audit Other Object Access Events"
+                }
+            },
+            "Scheduled Tasks Disabled": {
+                "4701": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A scheduled task was disabled",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Object Access\\Audit Other Object Access Events"
+                }
+            },
+            "Scheduled Tasks Updated": {
+                "4702": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A scheduled task was updated",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\Object Access\\Audit Other Object Access Events"
+                }
+            }
+            }
+        },
+    "Services": {
+        "events": {
+            "Windows Service Terminated Unexpectedly": {
+                "7031": {
+                    "level": "Error",
+                    "channel": "System",
+                    "provider": "Service Control Manager",
+                    "notes": "Service terminated unexpectedly, it has done this %n times"
+                },
+                "7034": {
+                    "level": "Error",
+                    "channel": "System",
+                    "provider": "Service Control Manager",
+                    "notes": "Service terminated unexpectedly, corrective action %x taken"
+                }
+            },
+            "Windows Service Start Type Changed": {
+                "7040": {
+                    "level": "Information",
+                    "channel": "System",
+                    "provider": "Service Control Manager",
+                    "notes": "Service start type changed"
+                }
+            },
+            "New Service Installed": {
+                "4697": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A service was installed in the system",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\System\\Audit Security System Extension"
+                }
+            }
+        }
+    },
+    "System Integrity": {
+        "events": {
+            "Authentication Package Loaded": {
+                "4610": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "An authentication package has been loaded by the Local Security Authority",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\System\\Audit Security System Extension"
+                }
+            },
+            "Trusted Logon Process Registered": {
+                "4611": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A trusted logon process has been registered with the Local Security Authority",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\System\\Audit Security System Extension"
+                }
+            },
+            "Notification Package Loaded": {
+                "4614": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A notification package has been loaded by the Security Account Manager",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\System\\Audit Security System Extension"
+                }
+            },
+            "Security Package Loaded": {
+                "4622": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "A security package has been loaded by the Local Security Authority",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\System\\Audit Security System Extension"
+                }
+            },
+            "Invalid Image Hash": {
+                "5038": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "Code integrity determined that the image hash of a file is not valid.",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\System\\Audit System Integrity"
+                }
+            },
+            "Invalid Image Page Hashes": {
+                "6281": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "Code integrity determined that the page hashes of an image file are not valid.",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\System\\Audit System Integrity"
+                }
+            },
+            "Missing Security Req. to Load File": {
+                "6410": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "Code integrity determined that a file does not meet the security requirements to load into a process.",
+                    "gpo": "Computer Configuration\\Policies\\Windows Settings\\Security Settings\\Advanced Audit Policy Configuration\\System\\Audit System Integrity"
+                }
+            },
+            "Untrusted Font": {
+                "260": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Win32k/Operational",
+                    "provider": "Microsoft-Windows-Win32k",
+                    "notes": "Attempt to load untrusted font",
+                    "gpo": "Computer Configuration\\Policies\\Administrative Templates\\System\\Mitigation Options\\Untrusted Font Blocking"
+                }
+            }
+        }
+    },
+    "WMI": {
+        "events": {
+            "WMI Provider Loaded": {
+                "5857": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-WMI-Activity/Operational",
+                    "provider": "Microsoft-Windows-WMI-Activity",
+                    "notes": "A WMI provider was loaded"
+                }
+            },
+            "WMI Query Error": {
+                "5858": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-WMI-Activity/Operational",
+                    "provider": "Microsoft-Windows-WMI-Activity",
+                    "notes": "A WMI query error has occured"
+                }
+            },
+            "Temporary WMI event subscription created": {
+                "5860": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-WMI-Activity/Operational",
+                    "provider": "Microsoft-Windows-WMI-Activity",
+                    "notes": "A temporary WMI event subscription has been created"
+                }
+            },
+            "Permanent WMI event subscription created": {
+                "5861": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-WMI-Activity/Operational",
+                    "provider": "Microsoft-Windows-WMI-Activity",
+                    "notes": "A permanent WMI event subscription has been created"
+                }
+        }
+        }
+    },
+    "System Status": {
+        "events": {
+            "App Crash": {
+                "1000": {
+                    "level": "Error",
+                    "channel": "Application",
+                    "provider": "Application Error",
+                    "notes": "Application Crashed"
+                }
+            },
+            "App Hang": {
+                "1002": {
+                    "level": "Error",
+                    "channel": "Application",
+                    "provider": "Application Hang",
+                    "notes": "Application hang"
+                }
+            },
+            "Windows Startup": {
+                "12": {
+                    "level": "Information",
+                    "channel": "System",
+                    "provider": "Microsoft-Windows-Kernel-General",
+                    "notes": "Windows Startup"
+                }
+            },
+            "Windows Shutdown": {
+                "13": {
+                    "level": "Information",
+                    "channel": "System",
+                    "provider": "Microsoft-Windows-Kernel-General",
+                    "notes": "Windows Shutdown"
+                }
+            },
+            "Unexpected Shutdown": {
+                "41": {
+                    "level": "Critical",
+                    "channel": "System",
+                    "provider": "Microsoft-Windows-Kernel-Power",
+                    "notes": "Unexpected Shutdown or Bluescreen"
+                }
+            },
+            "Shutdown Initiate": {
+                "1074": {
+                    "level": "Warning",
+                    "channel": "System",
+                    "provider": "User32",
+                    "notes": "Shutdown initiate request"
+                }
+            },
+            "System Time Changed": {
+                "4616": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "System time change may be indicative of attempts to tamper with the system."
+                }
+            },
+            "Boot Configuration Data Loaded": {
+                "4826": {
+                    "level": "Information",
+                    "channel": "Security",
+                    "provider": "Microsoft-Windows-Security-Auditing",
+                    "notes": "Boot Configuration Data Loaded"
+                }
+            }
+        }
+    },
+    "Windows Defender": {
+        "events": {
+            "ACG Audit": {
+                "1": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Security-Mitigations/KernelMode",
+                    "provider": "Microsoft-Windows-Security-Mitigations",
+                    "notes": "Arbitrary Code Guard Auditing"
+                }
+            },
+            "ACG Block": {
+                "2": {
+                    "level": "Warning",
+                    "channel": "Microsoft-Windows-Security-Mitigations/KernelMode",
+                    "provider": "Microsoft-Windows-Security-Mitigations",
+                    "notes": "Arbitrary Code Guard Enforcement"
+                }
+            },
+            "Audit Child Process Creation": {
+                "3": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Security-Mitigations/KernelMode",
+                    "provider": "Microsoft-Windows-Security-Mitigations",
+                    "notes": "Child Process Creation Auditing"
+                }
+            },
+            "Block Child Process Creation": {
+                "4": {
+                    "level": "Warning",
+                    "channel": "Microsoft-Windows-Security-Mitigations/KernelMode",
+                    "provider": "Microsoft-Windows-Security-Mitigations",
+                    "notes": "Child Process Creation Enforcement"
+                }
+            },
+            "Audit Low Integrity Image Load": {
+                "5": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Security-Mitigations/KernelMode",
+                    "provider": "Microsoft-Windows-Security-Mitigations",
+                    "notes": "Low Integrity Image Load Auditing"
+                }
+            },
+            "Block Low Integrity Image Load": {
+                "6": {
+                    "level": "Warning",
+                    "channel": "Microsoft-Windows-Security-Mitigations/KernelMode",
+                    "provider": "Microsoft-Windows-Security-Mitigations",
+                    "notes": "Low Integrity Image Load Enforcement"
+                }
+            },
+            "Audit Remote Image Loads": {
+                "7": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Security-Mitigations/KernelMode",
+                    "provider": "Microsoft-Windows-Security-Mitigations",
+                    "notes": "Remote Image Loads Auditing"
+                }
+            },
+            "Block Remote Image Loads": {
+                "8": {
+                    "level": "Warning",
+                    "channel": "Microsoft-Windows-Security-Mitigations/KernelMode",
+                    "provider": "Microsoft-Windows-Security-Mitigations",
+                    "notes": "Remote Image Loads Enforcement"
+                }
+            },
+            "Audit Win32K System Call Table Use": {
+                "9": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Security-Mitigations/KernelMode",
+                    "provider": "Microsoft-Windows-Security-Mitigations",
+                    "notes": "Audit the use of Win32K System Call Table"
+                }
+            },
+            "Block Win32K System Call Table Use": {
+                "10": {
+                    "level": "Warning",
+                    "channel": "Microsoft-Windows-Security-Mitigations/KernelMode",
+                    "provider": "Microsoft-Windows-Security-Mitigations",
+                    "notes": "Prevent the use of Win32K System Call Table"
+                }
+            },
+            "CIG Audit": {
+                "11": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Security-Mitigations/KernelMode",
+                    "provider": "Microsoft-Windows-Security-Mitigations",
+                    "notes": "A non-Microsoft-signed binary would have been loaded"
+                }
+            },
+            "CIG Block": {
+                "12": {
+                    "level": "Warning",
+                    "channel": "Microsoft-Windows-Security-Mitigations/KernelMode",
+                    "provider": "Microsoft-Windows-Security-Mitigations",
+                    "notes": "A Non-Microsoft-signed binary was prevented from loading"
+                }
+            },
+            "EAF Audit": {
+                "13": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Security-Mitigations/UserMode",
+                    "provider": "Microsoft-Windows-Security-Mitigations",
+                    "notes": "Process would have been blocked from accessing the Export Address Table for module"
+                }
+            },
+            "EAF Enforce": {
+                "14": {
+                    "level": "Warning",
+                    "channel": "Microsoft-Windows-Security-Mitigations/UserMode",
+                    "provider": "Microsoft-Windows-Security-Mitigations",
+                    "notes": "Process was blocked from accessing the Export Address Table for module"
+                }
+            },
+            "EAF+ Audit": {
+                "15": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Security-Mitigations/UserMode",
+                    "provider": "Microsoft-Windows-Security-Mitigations",
+                    "notes": "Process would have been blocked from accessing the Export Address Table for module"
+                }
+            },
+            "EAF+ Enforce": {
+                "16": {
+                    "level": "Warning",
+                    "channel": "Microsoft-Windows-Security-Mitigations/UserMode",
+                    "provider": "Microsoft-Windows-Security-Mitigations",
+                    "notes": "Process was blocked from accessing the Export Address Table for module"
+                }
+            },
+            "IAF Audit": {
+                "17": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Security-Mitigations/UserMode",
+                    "provider": "Microsoft-Windows-Security-Mitigations",
+                    "notes": "Process would have been blocked from accessing the import Address Table for API"
+                }
+            },
+            "IAF Enforce": {
+                "18": {
+                    "level": "Warning",
+                    "channel": "Microsoft-Windows-Security-Mitigations/UserMode",
+                    "provider": "Microsoft-Windows-Security-Mitigations",
+                    "notes": "Process was blocked from accessing the Import Address Table for API"
+                }
+            },
+            "ROP StackPivot Audit": {
+                "19": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Security-Mitigations/UserMode",
+                    "provider": "Microsoft-Windows-Security-Mitigations",
+                    "notes": "Process would have been blocked from calling the API due to ROP exploit indications"
+                }
+            },
+            "ROP StackPivot Enforce": {
+                "20": {
+                    "level": "Warning",
+                    "channel": "Microsoft-Windows-Security-Mitigations/UserMode",
+                    "provider": "Microsoft-Windows-Security-Mitigations",
+                    "notes": "Process was blocked from calling the API due to ROP exploit indications"
+                }
+            },
+            "ROP CallerCheck Audit": {
+                "21": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Security-Mitigations/UserMode",
+                    "provider": "Microsoft-Windows-Security-Mitigations",
+                    "notes": "Process would have been blocked from calling the API due to ROP exploit indications"
+                }
+            },
+            "ROP CallerCheck Enforce": {
+                "22": {
+                    "level": "Warning",
+                    "channel": "Microsoft-Windows-Security-Mitigations/UserMode",
+                    "provider": "Microsoft-Windows-Security-Mitigations",
+                    "notes": "Process was blocked from calling the API due to ROP exploit indications"
+                }
+            },
+            "ROP SimExec Audit": {
+                "23": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Security-Mitigations/UserMode",
+                    "provider": "Microsoft-Windows-Security-Mitigations",
+                    "notes": "Process would have been blocked from calling the API due to ROP exploit indications"
+                }
+            },
+            "ROP SimExec Enforce": {
+                "24": {
+                    "level": "Warning",
+                    "channel": "Microsoft-Windows-Security-Mitigations/UserMode",
+                    "provider": "Microsoft-Windows-Security-Mitigations",
+                    "notes": "Process was blocked from calling the API due to ROP exploit indications"
+                }
+            },
+            "CFG Violation": {
+                "5": {
+                    "level": "Information",
+                    "channel": "System",
+                    "provider": "Microsoft-Windows-WER-Diag",
+                    "notes": "Control Flow Guard Violation"
+                }
+            },
+            "Detected Malware": {
+                "1006, 1116": {
+                    "level": "Warning",
+                    "channel": "Microsoft-Windows-Windows Defender/Operational",
+                    "provider": "Microsoft-Windows-Windows Defender",
+                    "notes": "Malware detected"
+                }
+            },
+            "Action on Malware Failed": {
+                "1008": {
+                    "level": "Error",
+                    "channel": "Microsoft-Windows-Windows Defender/Operational",
+                    "provider": "Microsoft-Windows-Windows Defender",
+                    "notes": "Action on malware failed"
+                }
+            },
+            "File Restored from Quarantine": {
+                "1009": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Windows Defender/Operational",
+                    "provider": "Microsoft-Windows-Windows Defender",
+                    "notes": "Restored file from quarantine"
+                }
+            },
+            "Failed to remove item from quarantine": {
+                "1010": {
+                    "level": "Error",
+                    "channel": "Microsoft-Windows-Windows Defender/Operational",
+                    "provider": "Microsoft-Windows-Windows Defender",
+                    "notes": "Failed to remove item from quarantine"
+                }
+            },
+            "Malware Removed": {
+                "1007, 1117": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Windows Defender/Operational",
+                    "provider": "Microsoft-Windows-Windows Defender",
+                    "notes": "Malware removal action taken"
+                }
+            },
+            "Malware Removal Error": {
+                "1118": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Windows Defender/Operational",
+                    "provider": "Microsoft-Windows-Windows Defender",
+                    "notes": "Malware removal action taken with non-critical error"
+                }
+            },
+            "Malware Removal Fatal Error": {
+                "1119": {
+                    "level": "Error",
+                    "channel": "Microsoft-Windows-Windows Defender/Operational",
+                    "provider": "Microsoft-Windows-Windows Defender",
+                    "notes": "Malware removal action attempted with critical error"
+                }
+            },
+            "ASR Rule Triggers (Block-Mode)": {
+                "1121": {
+                    "level": "Warning",
+                    "channel": "Microsoft-Windows-Windows Defender/Operational",
+                    "provider": "Microsoft-Windows-Windows Defender",
+                    "notes": "Attack Surface Reduction rule fired in Block-Mode"
+                }
+            },
+            "ASR Rule Triggers (Audit-Mode)": {
+                "1122": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Windows Defender/Operational",
+                    "provider": "Microsoft-Windows-Windows Defender",
+                    "notes": "Attack Surface Reduction rule fired in Audit-Mode"
+                }
+            },
+            "Controlled Folder Access (Blocked)": {
+                "1123": {
+                    "level": "Warning",
+                    "channel": "Microsoft-Windows-Windows Defender/Operational",
+                    "provider": "Microsoft-Windows-Windows Defender",
+                    "notes": "Blocked Controlled Folder Access"
+                }
+            },
+            "Controlled Folder Access (Audited)": {
+                "1124": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Windows Defender/Operational",
+                    "provider": "Microsoft-Windows-Windows Defender",
+                    "notes": "Audited Controlled Folder Access"
+                }
+            },
+            "Network Protection (Block-Mode)": {
+                "1125": {
+                    "level": "Warning",
+                    "channel": "Microsoft-Windows-Windows Defender/Operational",
+                    "provider": "Microsoft-Windows-Windows Defender",
+                    "notes": "Network Protection fires in Audit-mode"
+                }
+            },
+            "Network Protection (Audit-Mode)": {
+                "1126": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Windows Defender/Operational",
+                    "provider": "Microsoft-Windows-Windows Defender",
+                    "notes": "Network Protection fires in Block-mode"
+                }
+            },
+            "ASR Settings Changed": {
+                "5007": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Windows Defender/Operational",
+                    "provider": "Microsoft-Windows-Windows Defender",
+                    "notes": "Attack Surface Reduction, Controlled Folder Access or Network Protection settings changed"
+                }
+            }
+        }
+    }
+}

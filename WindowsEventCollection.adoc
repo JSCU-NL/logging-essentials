@@ -1,0 +1,627 @@
+:uri-rel-file-base: link:
+:uri-rel-tree-base: link:
+ifdef::env-site,env-yard[]
+:uri-rel-file-base: {uri-repo}/blob/master/
+:uri-rel-tree-base: {uri-repo}/tree/master/
+endif::[]
+
+:uri-logging: {uri-rel-file-base}WindowsEventLogging.adoc
+
+ifndef::env-github[]
+:imagesdir: ../images
+endif::[]
+
+= Windows Event Forwarding / Collection
+:toc:
+:toc-title:
+
+== Introduction
+Several techniques exist to centralize the collection of Windows events. One of
+these techniques is native to the Windows Operating System (OS) and exist of the
+following two main components:
+
+* Windows Event Forwarding (WEF)
+* Windows Event Collector (WEC)
+
+An advantage of this technique over other techniques is that WEF/WEC allows one
+to retain the Windows XML Eventlog (EVTX) format of events. This allows for greater
+flexibility when processing these events from a centralized point in your 
+infrastructure. The visualization below shows the several components which make
+up the WEF/WEC architecture.
+
+ifndef::env-github[]
+image::wef_wec.png[align="center"]
+endif::[]
+
+ifdef::env-github[]
+++++
+<p align="center">
+<img src="images/wef_wec.png"/>
+</p>
+++++
+endif::[]
+
+The Event Collector is a Windows Service which can be run on any Windows OS such as
+Windows 10 and Windows server 2019. The main functionality of this service is to accept forwarded
+events and manage subscriptions. In a nutshell Subscriptions are used by the 
+Event Collector to define the events that it would like to receive, how these 
+events should be forwarded and which clients should forward the events described 
+in the subscription. 
+
+Subscriptions can be configured in one of the following two modes:
+
+* **Pull** - Collector initiated
+* **Push** - Source computer initiated
+
+Although WEF/WEC is usually deployed inside a Windows Active Directory domain
+one can also deploy WEF/WEC without an Active Directory domain. A mixed deployment
+of domain and non-domain joined computers is also possible. On this page we
+only focus on a deployment of WEF/WEC inside a Windows Active Directory domain
+using source computer initiated subscriptions.
+
+The Eventlog-ForwardingPlugin's responsibility is to forward events to the Event Collector.
+Please note that it's also possible to configure the aforementioned component on the Event
+Collector itself to forward different events to a specific (single) event log.
+In regards to the network communication, the Eventlog-ForwardingPlugin uses TCP port 5985
+to contact the Event Collector. WinRM is used as communication mechanism between the 
+Event Collector and Eventlog-ForwardingPlugin. Communication is authenticated and encrypted
+using Kerberos. This applies specifically to WEF/WEC deployments inside a Windows Active Directory
+domain. In absence of an Active Directory domain, TCP port 5986 is used. Such an environment
+also requires the setup and configuration of a TLS-certificate.
+
+[IMPORTANT]
+Additional security hardening of systems hosting the WEC-functionality is recommended as these systems
+contain forwarded event logging from multiple (if not all) Windows systems in your environment.
+These events could for example, be of interest during attacker's reconnaissance of the environment.
+
+== Scaling WEC/WEF
+
+=== Hardware Configuration
+Microsoft recommends to deploy one Event Collector for every 2000 to 4000 Windows systems
+from which you want to collect event logging. Each Event Collector needs to be configured
+with at least 16 GB of RAM and 4 processor cores. This recommendation applies to a
+deployment with at most two subscriptions configured.
+
+
+.Windows Server Updates
+[NOTE]
+====
+Specifically for Event Collectors running Windows Server 2016 or Windows Server 2019 the
+following update needs to be installed with respect to the install Windows Server edition
+footnoteref:[wec-performance,pass:[<a class="bare" href="https://docs.microsoft.com/en-us/troubleshoot/windows-server/admin-development/configure-eventlog-forwarding-performance">https://docs.microsoft.com/en-us/troubleshoot/windows-server/admin-development/configure-eventlog-forwarding-performance</a>]].
+
+* KB4537806 (Windows Server 2016)
+* KB4537818 (Windows Server 2019)
+
+Both updates are described as updates which improve the scalability of the Event Collector
+functionality.
+====
+
+=== Timers
+Subscriptions can be configured with several timers. The list of timers and timer-related
+parameters can be found in the list below.
+
+* Refresh
+* DeliveryMaxLatency
+* HeartbeatInterval
+* Event batch size
+
+In the remainder of this section we discuss the parameters listed above. Furthermore, we
+also discuss several trade-offs related to configuring these timers as well as predefined
+profiles which can be used. 
+
+==== Refresh
+Compared to the other parameters the Refresh parameter is the
+only parameter which isn't defined within the subscription. Instead this parameter is defined
+in the `Configure target Subscription Manager` GPO-setting. This value is appended to
+the same string which defines the Event Collector URL. As separation character a `,`
+comma is being used. For example if we want to configure the Refresh parameter on 60
+seconds, `Server=http://collector.example.com:5985/wsman/SubscriptionManager/WEC`
+becomes the following.
+```
+Server=http://collector.example.com:5985/wsman/SubscriptionManager/WEC,Refresh=60
+```
+This parameter defines how often a client needs to contact the Event Collector for updates
+to the subscription. The Event Collector responds with a list of subscriptions applicable
+to the client. By default the Refresh parameter is configured to `900 seconds` which
+is the same as 15 minutes. Microsoft recommends to adjust this parameter based on the
+frequency in which you apply changes to subscriptions. If subscriptions don't change
+frequently this parameter should be configured in the range of hours
+footnoteref:[wec-performance].
+
+==== DeliveryMaxLatency
+The DeliveryMaxLatency parameter is used to control the frequency of connections made
+from a forwarding system to the Event Collector. This parameter is configured in milliseconds.
+Attention should be payed to this parameter when interested in modifying the time between
+an event being generated and that same event being forwarded to the Event Collector.
+
+==== HeartbeatInterval
+The HeartbeatInterval is used to determine after which time a forwarding system should be
+marked as inactive on the Event Collector. As with the DeliveryMaxLatency parameter, this 
+parameter is also configured in milliseconds. The HeartbeatInterval parameter should be 
+configured equal to or larger than the DeliveryMaxLatency parameter
+footnoteref:[wec-performance].
+
+==== Event batch size
+The fourth parameter called event batch size determines how many events should be generated
+before events are forwarded to the Event Collector. If the configured amount of subscriptions
+is reached before the DeliveryMaxLatency parameter is reached, the batched events are 
+forwarded to the Event Collector anyway. 
+
+
+==== Event Delivery Optimizations
+Subscriptions can be configured with so-called Event Delivery Optimizations. These 
+optimizations can be thought of as profiles
+with pre-configured values for the DeliveryMaxLatency and HeartbeatInterval parameters. 
+Four different optimizations can be selected:
+
+* Normal
+* Minimize Bandwidth
+* Minimize Latency
+* Custom
+
+Normal Event Delivery Optimization pre-configures both the DeliveryMaxLatency and
+HeartbeatInterval parameters to 15 minutes. This profile is selected by default. With the 
+Minimize Bandwidth profile both the DeliveryMaxLatency and HeartbeatInterval parameters are configured 
+to 6 hours. The goal of this profile is to reduce the amount of connections that have to be 
+made between the Event Collector and Eventlog-ForwardingPlugin. The Minimize Latency profile configures
+the DeliveryMaxLatency parameter to 30 seconds. The HeartbeatInterval parameter is configured on 1 hour. 
+The final optimization profile is Custom and can not be configured through Event Viewer. Instead `wecutil`
+should be used to configure the DeliveryMaxLatency and HeartbeatInterval parameters to a value
+to one's choosing. Optionally one can configure an Event batch size value.
+
+To change the Event Delivery Optimization profile to Custom execute the following command.
+```
+wecutil ss <subscription_name> /cm:custom
+```
+
+The `ss` (set-subscription) is used to edit a specific subscription. Parameter `cm` (Config mode)
+is then used to specify the Event Delivery Optimization profile. Other valid values are: `Normal`,
+`MinLatency` or `MinBandwidth`. This modification initializes the DeliveryMaxLatency parameter in
+the subscription to 15 minutes and the DeliveryMaxLatency parameter to 1 hour. In order to then
+configure the DeliveryMaxLatency parameter execute the command below.
+```
+wecutil ss <subscription_name> /dmlt:<milliseconds>
+```   
+
+One can alter the value specified to the HeartbeatInterval parameter using the command below.
+```
+wecutil ss <subscription_name> /hi:<milliseconds>
+```
+
+Using the `/dmi` parameter the Event batch size can optionally be configured.
+```
+wecutil ss <subscription_name> /dmi:<integer>
+```
+
+When for example the network experiences negative impact when choosing one of the three pre-configured
+Event Delivery Optimizations or the amount of connections degrades the performance of the Event Collector
+altering the previously mentioned parameters could alleviate these issues. When altering these parameters
+take the current load of the network en compute infrastructure into account. 
+
+[IMPORTANT]
+Each time a client contacts the Event Collector a connection over WinRM between the Event Collector and 
+Eventlog-ForwardingPlugin is created. As the amount of systems that forward their events to the Event 
+Collector grows this could have a negative performance impact on the Event Collector. Increasing the 
+DeliveryMaxLatency parameter may help
+footnoteref:[wec-performance].
+
+Furthermore, be aware that
+the "Normal" Event Delivery Optimization may cause high memory usage when the collector accepts events
+of 2000 to 4000 clients.
+
+=== Event Format
+By default a subscription will instruct the forwarding systems to include the rendered text of an event
+in the forwarded event. The rendered text is the text you see when viewing an event through Event
+Viewer. A forwarded event's XML will look as follows when configured with the so-called RenderedText
+option.
+
+ifndef::env-github[]
+image::content_format_renderedtext.png[align="center"]
+endif::[]
+
+ifdef::env-github[]
+++++
+<p align="center">
+<img src="images/content_format_renderedtext.png"/>
+</p>
+++++
+endif::[]
+
+Specifically the RenderedText option will include the `<RenderingInfo>` element and sub elements in the
+forwarded event. Based on the amount of text inside the RenderingInfo element this can double or triple
+the size of the forwarded event. This in turn has a negative impact of the storage of events on the Event
+Collector. If you don't require the data contained within the RenderingInfo element for processing you can
+configure the subscription to instruct the forwarding systems not include rendered text. This is done through
+the following command.
+```
+wecutil ss <subscription_name> /cf:Events
+```
+
+The same event ID's binary Event XML will now look as follows.
+
+ifndef::env-github[]
+image::content_format_events.png[align="center"]
+endif::[]
+
+ifdef::env-github[]
+++++
+<p align="center">
+<img src="images/content_format_events.png"/>
+</p>
+++++
+endif::[]
+
+Please note that Event Viewer will still render the event's text when viewing the forwarded event through
+Event Viewer on the Event Collector. Therefore, this change doesn't impact the viewing of events through
+Event Viewer.
+
+
+
+== Configuration Steps
+In this section we show how to configure WEF/WEC inside a Windows Active Directory environment
+consisting of the following systems and roles:
+
+* **DC01.example.com** - Domain Controller of the example.com domain. This system runs Windows Server
+2019 Standard edition version 1809.
+* **EC01.example.com** - The Event Collector of the example.com domain which runs Windows Server
+2019 Standard edition version 1809.
+* **WS01.example.com** - WS01 is the workstation of our example.com domain which runs
+the Professional edition of Windows 10 version 20H2.
+
+The steps below imply that the systems mentioned above are running in a clean Active Directory
+domain in which they just joined.
+
+=== Step 1: Enable PowerShell Remoting
+In order to enable PowerShell Remoting on the Event Collector (`EC01`), execute the PowerShell 
+command below from inside a PowerShell window.
+```
+Enable-PSRemoting
+```
+
+[WARNING]
+.Security considerations
+When configuring PowerShell Remoting you're essentially increasing the potential
+attack surface of a system. Please see Microsoft's webpage on security considerations on
+PowerShell Remoting in order to gain an understanding of the security impact
+footnote:[https://docs.microsoft.com/en-us/powershell/scripting/learn/remoting/winrmsecurity].
+
+In order to verify that PowerShell remoting is enabled we execute the command below on
+a workstation (`WS01`). Invoke-Command executes the `hostname` command on our Event Collector
+(`EC01`). 
+```
+Invoke-Command -ComputerName EC01.EXAMPLE.COM -ScriptBlock {hostname}
+```
+In our case `EC01` (the hostname of the Event Collector) should be returned. Please note that the
+user which you use to log in on the workstation for this test needs to be a member of one of
+the following two local groups on the Event Collector (`EC01`):
+
+* Administrators
+* Remote Management Users 
+
+=== Step 2: Enable the Event Collector Service
+On the Event Collector (`EC01`) log in and open a command prompt with elevated permissions. 
+Inside the command prompt run the command below in order to automatically start the Windows
+Event Collector service (wecsvc) at boot.
+```
+sc config wecsvc start=auto
+```
+
+=== Step 3: Add NETWORK SERVICE to Event Log Readers
+In order to access the event log on the Event Collector (`EC01`), the `NETWORK SERVICE` 
+account which is used by WinRM needs to be a member of the local `Event Log Readers` group. 
+This is accomplished by configuring the GPO below and applying it to the computer account
+of the Event Collector (`EC01`).
+
+ifndef::env-github[]
+image::collector_gpo.png[align="center"]
+endif::[]
+
+ifdef::env-github[]
+++++
+<p align="center">
+<img src="images/collector_gpo.png"/>
+</p>
+++++
+endif::[]
+
+Please note that when adding the `NETWORK SERVICE` account to the `Event Log Readers` group
+an error is generated. However, this error can be ignored. Just click `close` and click
+`ok` again. The aforementioned error message is shown in the image below.
+
+ifndef::env-github[]
+image::NETWORK_SERVICE_error.png[align="center",500,500]
+endif::[]
+
+ifdef::env-github[]
+++++
+<p align="center">
+<img width="50%" height="20%" src="images/NETWORK_SERVICE_error.png"/>
+</p>
+++++
+endif::[]
+
+In step 1 we already warned about the impact of enabling PowerShell Remoting. To reduce the
+attack surface we configure the `Allow remote server management through WinRM` option. This
+option allows one to specify from which IP-addresses to accept WS-Management traffic. In our
+environment we only want to accept traffic from the local network which has the `10.0.10.0/24`
+subnet configured. Inside the `IPv4 filter` option we specify `10.0.10.1-10.0.10.254` as value.
+It's not possible to specify networks in CDIR-format. Multiple IP-ranges can be specified 
+by separating each range by a comma (`,`). Using the `IPv6 filter` option allowed ranges can
+be specified for WS-Management traffic using IPv6. In our case we don't use IPv6 so we leave
+this option empty. This results in denying any WS-Management traffic over IPv6.
+
+=== Step 4: Configure Forwarded Events Log
+Eventually we configure the Event Collector to store the forwarded events into the `Forwarded
+Events` log. The default behavior of Windows logs is to store events up to a maximum size of
+20480 KB (20.48 MB). When this size is reached the oldest events will be overwritten by new
+events. These default settings may pose a problem when an incident is detected that happened
+in the past and events generated around the time of the incident are required. In this step we
+modify these default values in order to use the Forwarded Events log on the Event Collector as
+an archiving solution. First open Event Viewer on the Event Collector and right click on
+`Forwarded Events` in the list on the left. Inside the context menu click on `Properties`.
+This action will pop up the window below.
+
+ifndef::env-github[]
+image::forwarded_events_properties.png[align="center",600,600]
+endif::[]
+
+ifdef::env-github[]
+++++
+<p align="center">
+<img width="50%" height="20%" src="images/forwarded_events_properties.png"/>
+</p>
+++++
+endif::[]
+
+As value for `Maximum log size` we specify `4194304` (4 GB). Furthermore we select the 
+`Archive the log when full, do not overwrite events` option under `When maximum event log size
+is reached`. By selecting the archiving option the current event log's `.evtx` file will be 
+renamed to the following format. 
+```
+Archive-<logname>-<YYYY>-<MM>-<DD>-<HH>-<MM>-<SS>-<MS>.evtx
+```
+An example of an archived event log is shown below.
+```
+Archive-Security-2020-10-23-08-22-01-134.evtx
+```
+After renaming the current event log's `.evtx`, a new event log file will be created in the same
+directory for handling new events. Be aware that selecting this option requires additional 
+hard disk capacity footnoteref:[wec-performance].
+
+[WARNING]
+.No space left on volume
+When there's no space left on the volume on which the event log is stored, the writing of forwarded
+events will come to a halt. Increasing the size of the volume alleviates this issue. However,
+this can result in loss of data when events are forwarded while the volume is full.
+To prevent a volume with no storage space left, make sure to monitor the volume's storage usage.
+
+Microsoft recommends to plan each Event Collector to be able to handle at least 3000 events per
+second (EPS). If it's suspected that the hard disk(s) for volume C cannot handle this number of
+EPS, move the log file's location to a hard disk which can handle the write speed equal to 3000
+EPS. The `Log Path` option can be used to specify an alternative location for the Forwarded Events
+log.
+
+[NOTE]
+.Moving log location
+When moving the log location, the events inside the previous log file location aren't moved to
+the log file in the new location. Preferably one should first copy the log file in
+the current location to the new location before changing the Log Path value in the properties
+window of the Event log.
+
+
+=== Step 5: Modify the WS-Management URL-ACL
+This step is applicable for Windows Server 2019 Event Collectors with more than
+3.5 GB of memory. If the Event Collector is running Windows Server 2016 with a
+modified service host grouping configuration which splits the grouping of the
+WinRM and Event Collector service into two separate processes, this step also
+applies. Note that by default this isn't the case with Windows Server 2016.
+A more thorough explanation of this issue can be found on Microsoft's website
+footnote:[https://docs.microsoft.com/en-us/troubleshoot/windows-server/admin-development/events-not-forwarded-by-windows-server-collector].
+
+
+Execute the commands below inside a command prompt run with elevated
+privileges in order to add the service SID of the Windows Event Collector (wecsvc) 
+service to the `http://+:5985/wsman/` URL-ACL. This URL is used by the Eventlog-ForwardingPlugin 
+to forward Event logging. 
+
+```
+netsh http delete urlacl url=http://+:5985/wsman/
+netsh http add urlacl url=http://+:5985/wsman/ sddl=D:(A;;GX;;;S-1-5-80-569256582-2953403351-2909559716-1301513147-412116970)(A;;GX;;;S-1-5-80-4059739203-877974739-1245631912-527174227-2996563517)
+netsh http delete urlacl url=https://+:5986/wsman/
+netsh http add urlacl url=https://+:5986/wsman/ sddl=D:(A;;GX;;;S-1-5-80-569256582-2953403351-2909559716-1301513147-412116970)(A;;GX;;;S-1-5-80-4059739203-877974739-1245631912-527174227-2996563517)
+```
+The Event Collector (`EC01`) must be restarted afterwards.
+
+=== Step 6: Configure the Eventlog-ForwardingPlugin
+In order to enable the Windows systems to forward events we configure a GPO which contains the 
+following settings:
+
+* Add the `NETWORK SERVICE` to the `Event Log Readers` group. The same error from step
+3 can be ignored when configuring this setting.
+* Enable the `Windows Remote Management (WS-Management)` service to start automatically.
+For Windows server editions this is already the case.
+* Configure the Event Collector's URL: `Server=http://<collector-FQDN>:5985/wsman/SubscriptionManager/WEC`
+
+On each client we recommend the following maximum log sizes for specific Windows logs:
+
+* **Application** - 1048576 KB (1 GB)
+* **Security** - 4194304 KB (4 GB)
+* **System** - 1048576 KB (1 GB)
+
+Compared to the default maximum log sizes this allows for extended log retention on the
+client systems. The image below shows the GPO-settings which should be configured. 
+Furthermore, this GPO should be scoped on the computer accounts from which you want
+to receive events.
+
+ifndef::env-github[]
+image::forwarder_gpo.png[align="center"]
+endif::[]
+
+ifdef::env-github[]
+++++
+<p align="center">
+<img src="images/forwarder_gpo.png"/>
+</p>
+++++
+endif::[]
+
+=== Step 7: Creating Subscriptions
+For completeness we finally show you how to create subscriptions yourself. If you're
+only interested in importing the subscription contained within this repository you
+can move on to the next step.
+
+This step configures the subscriptions which will tell the Eventlog-ForwardingPlugin which event logs should be forwarded and configures the communication with the Event Collector.
+On the Event Collector (`EC01`) open Event Viewer (`eventvwr.msc`) and navigate in the left list
+to `Subscriptions`. Opening the subscriptions overview for the first time shows the infobox 
+message below.
+
+ifndef::env-github[]
+image::subscriptions_first_time.png[align="center",500,500]
+endif::[]
+
+ifdef::env-github[]
+++++
+<p align="center">
+<img width="50%" height="20%" src="images/subscriptions_first_time.png"/>
+</p>
+++++
+endif::[]
+
+If the window above pops up, click "Yes". Afterwards right click on `Subscriptions` and click
+inside the context menu on `Create Subscription...`.
+
+ifndef::env-github[]
+image::01_create_subscription.png[align="center",200,200]
+endif::[]
+
+ifdef::env-github[]
+++++
+<p align="center">
+<img width="20%" height="20%" src="images/01_create_subscription.png"/>
+</p>
+++++
+endif::[]
+
+ifndef::env-github[]
+image::02_configure_subscription.png[align="center",500,500]
+endif::[]
+
+ifdef::env-github[]
+++++
+<p align="center">
+<img width="50%" height="20%" src="images/02_configure_subscription.png"/>
+</p>
+++++
+endif::[]
+
+Inside the window that just opened we can create a subscription. First apply a name to the 
+subscription and optionally a description. Under `Subscription type and source computers`
+select `Source computer initiated` and select the computers from which you want to
+receive forwarded Event logging. These computers can be selected by clicking on the
+`Select Computer Groups...` button. By clicking on `Select Events...` we can configure
+which events we want to collect. This is done the same way as one would filter a local
+log. The image below shows an example filter which dictates that we want to receive the
+full `Security` log. 
+
+ifndef::env-github[]
+image::03_configure_filter.png[align="center",500,500]
+endif::[]
+
+ifdef::env-github[]
+++++
+<p align="center">
+<img width="50%" height="20%" src="images/03_configure_filter.png"/>
+</p>
+++++
+endif::[]
+
+After applying the filter one can click `OK` in order to create the subscription.
+
+[NOTE]
+.Advanced filtering
+In the image above there also exists an XML-tab. This tab can be used to develop an event filter 
+in XML-format using XPath 1.0 statements. This allows one to develop advanced event filters which
+can be copied between subscription configurations. Microsoft published a blog posting on this subject
+which describes the usage and limitations of XML-based Event filtering
+footnote:[https://techcommunity.microsoft.com/t5/ask-the-directory-services-team/advanced-xml-filtering-in-the-windows-event-viewer/ba-p/399761].
+
+=== Step 8: Importing Subscriptions
+Before executing this step, make sure to first follow the configuration steps described
+on the {uri-logging}[Windows Event Logging] page. Next we import the subscription file
+contained within this repository into the Event Collector (`EC01`). First make sure the
+`subscription.xml` contained within the `subscriptions` directory is available on 
+the Event Collector (`EC01`). Open a command prompt with elevated privileges, navigate 
+to the directory containing the XML-subscription and execute the command below.
+```
+wecutil cs subscription.xml
+```
+
+The command above uses the `cs` (create subscription) parameter to create
+a new subscription with the provided XML-file as input. By default the imported subscription
+instruct computers that are member of the following groups to forward event logs:
+
+* Domain Computers
+* Domain Controllers
+
+Apart from the groups above, the `NETWORK SERVICE` account is also included in the scope.
+This account is included for forwarding the event log of the Event Collector itself
+systemfootnote:[https://docs.microsoft.com/en-us/windows/win32/wec/setting-up-a-source-initiated-subscription].
+
+== Debugging WEC/WEF
+This section describes common configuration issues including the way to resolve each issue.
+Before diving into the specifics we want to share common actions and sources which can be
+executed and used when troubleshooting WEC/WEF configurations.
+
+On the Event Collector an event channel `EventCollector/Operational` exist. This event channel
+can be viewed from e.g. Event Viewer by navigating to `Applications and Services Logs >
+Microsoft > Windows > Event Collector > Operational` using the list on the left side.
+Besides events related to the Event Collector service this event channel also contains events
+generated when configuring subscriptions.
+
+When trying to figure out why events aren't being forwarded even though the subscription
+was successfully activated, one can look at the events generated in the `Eventlog-ForwardingPlugin/Operational`
+channel on the forwarding systems. As with the earlier mentioned event channel on the event
+collector this event channel can be inspected using Event Viewer on the forwarding system
+by navigating to `Applications and Services Logs > Microsoft > Windows > Eventlog-ForwardingPlugin >
+Operational` using the list on the left. This event channel primarily contains events
+generated when connecting to an Event Collector based on a received subscription. 
+
+In the Timers section we explain the specific timers that are related to subscriptions and
+communication between the Event Collector and Eventlog-ForwardingPlugin. However, if one
+wants to force a connection to the Event Collector based on a subscription the command
+below can be executed on the forwarding systems. Apart from forcing a connection to the
+Event Collector this also updates the Group Policy settings. This command is usually used
+for accomplishing the latter.
+```
+gpupdate /force
+```
+
+The remainder of this section focusses on specific issues one can encounter when configuring
+WEF/WEC using the steps we laid out at the start of this page. If after following the steps
+to configure WEF/WEC no events are being forwarded to the Event Collector execute the
+`gpupdate /force` command on the forwarding system. Afterwards inspect the events 
+generated inside the `Eventlog-ForwardingPlugin/Operational` channel. When the event in the
+image below is generated make sure step 4 is executed successfully on the Event Collector.
+Don't forget to reboot the Event Collector afterwards. Otherwise the changes aren't
+effective.
+
+ifndef::env-github[] 
+image::event_105.png[align="center"]
+endif::[]
+
+ifdef::env-github[]
+++++
+<p align="center">
+<img src="images/event_105.png"/>
+</p>
+++++
+endif::[]
+
+When importing the subscription in step 8 the error below is generated.
+```
+Failed to open subscription. Error = 0x6ba.
+The RPC server is unavailable.
+```
+This error is caused due to the fact that the Event Collector service isn't active on the
+Event Collector. Make sure the Event Collector service is started and execute step 8 again.

@@ -1,0 +1,99 @@
+:uri-rel-file-base: link:
+:uri-rel-tree-base: link:
+ifdef::env-site,env-yard[]
+:uri-rel-file-base: {uri-repo}/blob/master/
+:uri-rel-tree-base: {uri-repo}/tree/master/
+endif::[]
+:uri-license: {uri-rel-file-base}LICENSE
+:uri-disclaimer: {uri-rel-file-base}DISCLAIMER
+:uri-mapping: {uri-rel-file-base}WindowsEventIDMapping.json
+:uri-collection: {uri-rel-file-base}WindowsEventCollection.adoc
+:uri-logging: {uri-rel-file-base}WindowsEventLogging.adoc
+
+
+= Windows Event Logging & Collection Guidance
+:toc:
+:toc-title:
+
+== About
+This repository offers administrators, analysts and information security professionals hands-on guidance on how to configure Windows Event Logging and centralize the collection using Windows Event Forwarding. 
+
+The documents included are written as a technical baseline to create visibility into your network by generating and collecting events that are deemed to have detection or forensic value while aiming to keep noise to a minimum. 
+Configurations in this baseline will be complementary to your AV, IDS or EDR deployments. 
+This approach will enable your organization to track down malicious behavior, shorten the investigation time in case of an incident and improve forensic readiness.
+
+Please note that this repository is not:
+
+- A replacement for your Anti-Virus, Intrusion Detection System or Endpoint Detection & Response solutions
+- A one-size-fits-all auditing recommendation
+- A compliance checklist
+- A guide on how to analyze the collected data
+
+== Layout
+
+- {uri-logging}[Windows Event Logging] 
+- {uri-collection}[Windows Event Collection]
+- {uri-mapping}[Windows Event ID Mapping]
+
+=== Windows Event Logging
+The Windows Event Logging document contains the recommended events that should be collected centrally regardless of using Windows Event Forwarding or third party SIEM. 
+The recommendations are based on our assessment of which events provide the most visibility into your environment and can be used to assist in forensic analysis, threat hunting or the detection of malicious behavior.
+
+A distinction is made between events that are configured by default and events that require the configuration of a Group Policy. 
+You can use the link:WindowsEventLogging.adoc#Overview[overview table] to navigate to a particular event category where you will either find the group policy settings to configure (and which systems to configure them for), or information on events which are enabled by default. 
+
+At the end of the document you will find a link:WindowsEventLogging.adoc#Table-of-Events-to-Collect[table], which just like the included JSON-mapping (described further down), provides an overview of all the event IDs that are important for collection and monitoring. 
+
+=== Windows Event Collection
+If your organization currently does not have a solution in place to centrally collect Windows Event Logs, the steps in this document will guide you through the process of setting up a WEF/WEC infrastructure. 
+This configuration uses a subscription to filter and collect the events as recommended in {uri-logging}[Windows Event Logging]. 
+
+[NOTE]
+If you are using other eventlog based applications for example Sysmon, you should change the subscription.xml file accordingly.
+
+=== Windows Event ID Mapping
+We have included a JSON mapping which contains all of the noteworthy Event IDs to collect for each of the categories described in the Windows Event Logging guide.
+
+== Considerations
+
+=== Scope
+The configurations are aimed at Windows environments with a minimum OS version of _Windows 10 1709_ for client systems and _Windows Server 1803_ for (member) servers. 
+When deploying these configurations on older versions, some features may not work and some group policies may not be available. 
+You may find it useful to create separate audit configurations based on the type of system (Clients, Domain Controllers, Member servers).
+
+=== Log retention
+You should consider for what time range you want to collect, analyse and store Windows Event Logs. 
+While the amount of data you can store heavily depends on your environment, we recommend having a historical set of data that goes back at least six months in time. 
+You can achieve this retention by increasing log file sizes, using the archival feature that comes with Windows Event Logs or include the logs into your back-up strategy. 
+Step 4 and 6 of our Windows Event Collection document describes the first two methods.
+
+=== Impact on existing infrastructure
+You should gradually introduce and test the configurations within this repository before applying them to a production environment. 
+Impact on the network and storage needs can differ depending on the size of the organization and the typical daily use of the systems within the organization. 
+In the section below you will find additional guidance and recommendations by Microsoft on sizing and how to plan accordingly when deploying advanced auditing policies.
+
+== Sources & Additional Links
+* https://docs.microsoft.com/en-us/windows/security/threat-protection/auditing/advanced-security-auditing[Microsoft advanced security auditing guidance]
+* https://docs.microsoft.com/en-us/windows/security/threat-protection/use-windows-event-forwarding-to-assist-in-intrusion-detection[Microsoft Windows Event Forwarding to help with intrusion detection]
+* https://github.com/palantir/windows-event-forwarding[Palantir Windows Event Forwarding Guidance Github]
+* https://www.cyber.gov.au/acsc/view-all-content/publications/windows-event-logging-and-forwarding[ACSC Windows Event Logging and Forwarding]
+* https://github.com/AustralianCyberSecurityCentre/windows_event_logging[ACSC Windows Event Logging Github]
+* https://github.com/ukncsc/lme[NCSC UK Logging Made Easy Github]
+* https://github.com/nsacyber/Event-Forwarding-Guidance[NSACyber Event Forwarding Guidance Github]
+* https://github.com/Neo23x0/sigma[Sigma for detection use-cases]
+* https://github.com/OTRF/OSSEM[Open Source Security Events Metadata Community]
+
+== Disclaimer
+ALTHOUGH THE INFORMATION ON THIS PLATFORM PROVIDED BY THE STATE OF THE NETHERLANDS HAVE BEEN PREPARED WITH THE UTMOST CARE, THE STATE OF THE NETHERLANDS SHALL IN NO EVENT BE LIABLE FOR ANY LOSS OR DAMAGE OF WHATEVER NATURE (DIRECT, INDIRECT, CONSEQUENTIAL, OR OTHER) WHETHER ARISING IN CONTRACT, TORT OR OTHERWISE WHICH MAY ARISE IN ANY WAY OUT OF (THE USE OF) THIS INFORMATION. 
+
+{uri-disclaimer}[DISCLAIMER]
+
+== License
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
+{uri-license}[LICENSE]
+

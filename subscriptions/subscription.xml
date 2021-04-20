@@ -1,0 +1,306 @@
+<Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
+    <SubscriptionId>default</SubscriptionId>
+    <Description>default subscription based on json mapping</Description>
+    <SubscriptionType>SourceInitiated</SubscriptionType>
+    <Enabled>true</Enabled>
+    <Uri>http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog</Uri>
+    <!--
+    <ConfigurationMode>Custom</ConfigurationMode>
+    <Delivery Mode="Push">
+        <Batching>
+            <MaxItems>1</MaxItems>
+            <MaxLatencyTime>1000</MaxLatencyTime>
+        </Batching>
+        <PushSettings>
+            <Heartbeat Interval="40000"/>
+        </PushSettings>
+    </Delivery>
+    -->
+
+    <Query>
+        <![CDATA[
+<QueryList>
+  <!--4610: An authentication package has been loaded by the Local Security Authority-->
+  <!--4611: A trusted logon process has been registered with the Local Security Authority-->
+  <!--4614: A notification package has been loaded by the Security Account Manager-->
+  <!--4616: System time change may be indicative of attempts to tamper with the system.-->
+  <!--4622: A security package has been loaded by the Local Security Authority-->
+  <!--4624: An account was successfully logged on-->
+  <!--4625: An account failed to log on-->
+  <!--4627: Group membership information.-->
+  <!--4634: Logoff event (terminated)-->
+  <!--4647: User initiated logoff-->
+  <!--4648: A logon was attempted using explicit credentials-->
+  <!--4649: A replay attack was detected (KRB_AP_ERR_REPEAT)-->
+  <!--4657: A registry value was modified-->
+  <!--4663: An attempt was made to access an object-->
+  <!--4672: Special Privileges assigned to Logon-->
+  <Query Id="1" Path="Security">
+    <Select Path="Security">*[System[Provider[@Name="Microsoft-Windows-Security-Auditing"] and (EventID=4610 or EventID=4611 or EventID=4614 or EventID=4616 or EventID=4622 or EventID=4624 or EventID=4625 or EventID=4627 or EventID=4634 or EventID=4647 or EventID=4648 or EventID=4649 or EventID=4657 or EventID=4663 or EventID=4672)]]</Select>
+  </Query>
+  <!--4673: A privileged service was called-->
+  <!--4688: Process Created-->
+  <!--4689: Process Terminated-->
+  <!--4697: A service was installed in the system-->
+  <!--4698: A scheduled task was created-->
+  <!--4699: A scheduled task was deleted-->
+  <!--4700: A scheduled task was enabled-->
+  <!--4701: A scheduled task was disabled-->
+  <!--4702: A scheduled task was updated-->
+  <!--4706: A new trust was created to a domain.-->
+  <!--4713: Kerberos policy changes-->
+  <!--4715: The audit policy (SACL) on an object was changed-->
+  <!--4716: Trusted domain information was modified-->
+  <!--4717: System security access was granted to an account-->
+  <!--4719: System audit policy was changed.-->
+  <Query Id="2" Path="Security">
+    <Select Path="Security">*[System[Provider[@Name="Microsoft-Windows-Security-Auditing"] and (EventID=4673 or EventID=4688 or EventID=4689 or EventID=4697 or EventID=4698 or EventID=4699 or EventID=4700 or EventID=4701 or EventID=4702 or EventID=4706 or EventID=4713 or EventID=4715 or EventID=4716 or EventID=4717 or EventID=4719)]]</Select>
+  </Query>
+  <!--4720: New user account created-->
+  <!--4722: A user account was enabled-->
+  <!--4723: An attempt was made to change an account's password-->
+  <!--4724: An attempt was made to reset an account's password-->
+  <!--4725: User Account Disabled-->
+  <!--4726: User Account Deleted-->
+  <!--4727: A security-enabled Global group was created-->
+  <!--4728: A member was added to a security-enabled Global group-->
+  <!--4729: Account removed from Global Security Group-->
+  <!--4730: A security-enabled Global group was deleted-->
+  <!--4731: A security-enabled Local group was created-->
+  <!--4732: A member was added to a security-enabled Local group-->
+  <!--4733: Account removed from Local Security Group-->
+  <!--4734: A security-enabled Local group was deleted-->
+  <!--4735: A security-enabled Local group was changed-->
+  <Query Id="3" Path="Security">
+    <Select Path="Security">*[System[Provider[@Name="Microsoft-Windows-Security-Auditing"] and (EventID=4720 or EventID=4722 or EventID=4723 or EventID=4724 or EventID=4725 or EventID=4726 or EventID=4727 or EventID=4728 or EventID=4729 or EventID=4730 or EventID=4731 or EventID=4732 or EventID=4733 or EventID=4734 or EventID=4735)]]</Select>
+  </Query>
+  <!--4737: A security-enabled Global group was changed-->
+  <!--4738: A user account was changed-->
+  <!--4739: Domain policy changes-->
+  <!--4740: A user account was locked out-->
+  <!--4741: A computer account was created-->
+  <!--4742: A computer account was changed-->
+  <!--4743: A computer account was deleted-->
+  <!--4754: A security-enabled Universal group was created-->
+  <!--4755: A security-enabled Universal group was changed-->
+  <!--4756: A member was added to a security-enabled Universal group-->
+  <!--4757: Account removed from Universal Security Group-->
+  <!--4758: A security-enabled Universal group was deleted-->
+  <!--4764: A group&#8217;s type was changed-->
+  <!--4767: A user account was unlocked-->
+  <!--4768: A Kerberos authentication ticket (TGT) was requested-->
+  <Query Id="4" Path="Security">
+    <Select Path="Security">*[System[Provider[@Name="Microsoft-Windows-Security-Auditing"] and (EventID=4737 or EventID=4738 or EventID=4739 or EventID=4740 or EventID=4741 or EventID=4742 or EventID=4743 or EventID=4754 or EventID=4755 or EventID=4756 or EventID=4757 or EventID=4758 or EventID=4764 or EventID=4767 or EventID=4768)]]</Select>
+  </Query>
+  <!--4769: A Kerberos service ticket was requested-->
+  <!--4771: Kerberos pre-authentication failed-->
+  <!--4778: TS Session Reconnect-->
+  <!--4779: TS Session Disconnect-->
+  <!--4780: The ACL was set on accounts which are members of administrators groups-->
+  <!--4781: The name of an account was changed-->
+  <!--4782: The password hash of an account was accessed-->
+  <!--4794: An attempt was made to set the Directory Services Restore Mode administrator password-->
+  <!--4798: A user's local group membership was enumerated-->
+  <!--4799: A security-enabled local group membership was enumerated-->
+  <!--4817: Auditing settings on object were changed-->
+  <!--4826: Boot Configuration Data Loaded-->
+  <!--4865: A trusted forest information entry was added-->
+  <!--4866: A trusted forest information entry was removed-->
+  <!--4867: A trusted forest information entry was modified-->
+  <Query Id="5" Path="Security">
+    <Select Path="Security">*[System[Provider[@Name="Microsoft-Windows-Security-Auditing"] and (EventID=4769 or EventID=4771 or EventID=4778 or EventID=4779 or EventID=4780 or EventID=4781 or EventID=4782 or EventID=4794 or EventID=4798 or EventID=4799 or EventID=4817 or EventID=4826 or EventID=4865 or EventID=4866 or EventID=4867)]]</Select>
+  </Query>
+  <!--4904: An attempt was made to register a security event source-->
+  <!--4905: An attempt was made to unregister a security event source-->
+  <!--4906: The CrashOnAuditFail value has changed-->
+  <!--4907: Auditing settings on object were changed-->
+  <!--4908: Special Groups Logon table modified-->
+  <!--4912: Per User Audit Policy was changed-->
+  <!--5038: Code integrity determined that the image hash of a file is not valid.-->
+  <!--5140: A network share object was accessed-->
+  <!--5142: A network share object was added-->
+  <!--5376: Credential Manager credentials were backed up-->
+  <!--5377: Credential Manager credentials were restored from a backup-->
+  <!--5632: Wireless 802.1X Auth-->
+  <!--6281: Code integrity determined that the page hashes of an image file are not valid.-->
+  <!--6410: Code integrity determined that a file does not meet the security requirements to load into a process.-->
+  <!--6416: A new external device was recognized by the System-->
+  <Query Id="6" Path="Security">
+    <Select Path="Security">*[System[Provider[@Name="Microsoft-Windows-Security-Auditing"] and (EventID=4904 or EventID=4905 or EventID=4906 or EventID=4907 or EventID=4908 or EventID=4912 or EventID=5038 or EventID=5140 or EventID=5142 or EventID=5376 or EventID=5377 or EventID=5632 or EventID=6281 or EventID=6410 or EventID=6416)]]</Select>
+  </Query>
+  <!--104: Event log other than security has been cleared-->
+  <Query Id="7" Path="System">
+    <Select Path="System">*[System[Provider[@Name="Microsoft-Windows-EventLog"] and (EventID=104)]]</Select>
+  </Query>
+  <!--1100: (Security Log) Event Log Service Shutdown-->
+  <!--1102: Security event log cleared-->
+  <Query Id="8" Path="Security">
+    <Select Path="Security">*[System[Provider[@Name="Microsoft-Windows-EventLog"] and (EventID=1100 or EventID=1102)]]</Select>
+  </Query>
+  <!--1024: Outbound TS connection attempt-->
+  <Query Id="9" Path="Microsoft-Windows-TerminalServices-RDPClient/Operational">
+    <Select Path="Microsoft-Windows-TerminalServices-RDPClient/Operational">*[System[Provider[@Name="Microsoft-Windows-TerminalServices-ClientActiveXCore"] and (EventID=1024)]]</Select>
+  </Query>
+  <!--1: BITS Job has been resumed-->
+  <!--3: New BITS Job-->
+  <!--4: BITS Job completion-->
+  <!--59: BITS Job started to transfer file-->
+  <Query Id="10" Path="Microsoft-Windows-Bits-Client/Operational">
+    <Select Path="Microsoft-Windows-Bits-Client/Operational">*[System[Provider[@Name="Microsoft-Windows-Bits-Client"] and (EventID=1 or EventID=3 or EventID=4 or EventID=59)]]</Select>
+  </Query>
+  <!--50028: IP address assigned to interface-->
+  <Query Id="11" Path="Microsoft-Windows-Dhcp-Client/Operational">
+    <Select Path="Microsoft-Windows-Dhcp-Client/Operational">*[System[Provider[@Name="Microsoft-Windows-Dhcp-Client"] and (EventID=50028)]]</Select>
+  </Query>
+  <!--51039: IP address assigned to interface-->
+  <Query Id="12" Path="Microsoft-Windows-DHCPv6-Client/Operational">
+    <Select Path="Microsoft-Windows-DHCPv6-Client/Operational">*[System[Provider[@Name="Microsoft-Windows-DHCPv6-Client"] and (EventID=51039)]]</Select>
+  </Query>
+  <!--3008: DNS Client events query completed-->
+  <Query Id="13" Path="Microsoft-Windows-DNS-Client/Operational">
+    <Select Path="Microsoft-Windows-DNS-Client/Operational">*[System[Provider[@Name="Microsoft-Windows-DNS-Client"] and (EventID=3008)]]</Select>
+  </Query>
+  <!--4104: Execute a Remote Command (Script Block Logging)-->
+  <Query Id="14" Path="Microsoft-Windows-PowerShell/Operational">
+    <Select Path="Microsoft-Windows-PowerShell/Operational">*[System[Provider[@Name="Microsoft-Windows-PowerShell"] and (EventID=4104)]]</Select>
+  </Query>
+  <!--8002: Configured to audit process starts.-->
+  <!--8003: Executable was allowed to run but would have been blocked in enforcing mode-->
+  <!--8004: Executable was prevented from running-->
+  <Query Id="15" Path="Microsoft-Windows-AppLocker/EXE and DLL">
+    <Select Path="Microsoft-Windows-AppLocker/EXE and DLL">*[System[Provider[@Name="Microsoft-Windows-AppLocker"] and (EventID=8002 or EventID=8003 or EventID=8004)]]</Select>
+  </Query>
+  <!--8005: Scripts and Installers run-->
+  <!--8006: File  was allowed to run but would have been blocked in enforcing mode-->
+  <!--8007: File was prevented from running-->
+  <Query Id="16" Path="Microsoft-Windows-AppLocker/MSI and Script">
+    <Select Path="Microsoft-Windows-AppLocker/MSI and Script">*[System[Provider[@Name="Microsoft-Windows-AppLocker"] and (EventID=8005 or EventID=8006 or EventID=8007)]]</Select>
+  </Query>
+  <!--8020: Modern app run-->
+  <Query Id="17" Path="Microsoft-Windows-AppLocker/Packaged app-Execution">
+    <Select Path="Microsoft-Windows-AppLocker/Packaged app-Execution">*[System[Provider[@Name="Microsoft-Windows-AppLocker"] and (EventID=8020)]]</Select>
+  </Query>
+  <!--8023: Modern app install-->
+  <Query Id="18" Path="Microsoft-Windows-AppLocker/Packaged app-Deployment">
+    <Select Path="Microsoft-Windows-AppLocker/Packaged app-Deployment">*[System[Provider[@Name="Microsoft-Windows-AppLocker"] and (EventID=8023)]]</Select>
+  </Query>
+  <!--865: Software Restriction Policies-->
+  <!--866: Software Restriction Policies-->
+  <!--867: Software Restriction Policies-->
+  <!--868: Software Restriction Policies-->
+  <!--882: Software Restriction Policies-->
+  <Query Id="19" Path="Application">
+    <Select Path="Application">*[System[Provider[@Name="Microsoft-Windows-SoftwareRestrictionPolicies"] and (EventID=865 or EventID=866 or EventID=867 or EventID=868 or EventID=882)]]</Select>
+  </Query>
+  <!--200: Task Launched-->
+  <!--201: Task Scheduler successfully completed task-->
+  <Query Id="20" Path="Microsoft-Windows-TaskScheduler/Operational">
+    <Select Path="Microsoft-Windows-TaskScheduler/Operational">*[System[Provider[@Name="Microsoft-Windows-TaskScheduler"] and (EventID=200 or EventID=201)]]</Select>
+  </Query>
+  <!--7031: Service terminated unexpectedly, it has done this %n times-->
+  <!--7034: Service terminated unexpectedly, corrective action %x taken-->
+  <!--7040: Service start type changed-->
+  <Query Id="21" Path="System">
+    <Select Path="System">*[System[Provider[@Name="Service Control Manager"] and (EventID=7031 or EventID=7034 or EventID=7040)]]</Select>
+  </Query>
+  <!--260: Attempt to load untrusted font-->
+  <Query Id="22" Path="Microsoft-Windows-Win32k/Operational">
+    <Select Path="Microsoft-Windows-Win32k/Operational">*[System[Provider[@Name="Microsoft-Windows-Win32k"] and (EventID=260)]]</Select>
+  </Query>
+  <!--5857: A WMI provider was loaded-->
+  <!--5858: A WMI query error has occured-->
+  <!--5860: A temporary WMI event subscription has been created-->
+  <!--5861: A permanent WMI event subscription has been created-->
+  <Query Id="23" Path="Microsoft-Windows-WMI-Activity/Operational">
+    <Select Path="Microsoft-Windows-WMI-Activity/Operational">*[System[Provider[@Name="Microsoft-Windows-WMI-Activity"] and (EventID=5857 or EventID=5858 or EventID=5860 or EventID=5861)]]</Select>
+  </Query>
+  <!--1000: Application Crashed-->
+  <Query Id="24" Path="Application">
+    <Select Path="Application">*[System[Provider[@Name="Application Error"] and (EventID=1000)]]</Select>
+  </Query>
+  <!--1002: Application hang-->
+  <Query Id="25" Path="Application">
+    <Select Path="Application">*[System[Provider[@Name="Application Hang"] and (EventID=1002)]]</Select>
+  </Query>
+  <!--12: Windows Startup-->
+  <!--13: Windows Shutdown-->
+  <Query Id="26" Path="System">
+    <Select Path="System">*[System[Provider[@Name="Microsoft-Windows-Kernel-General"] and (EventID=12 or EventID=13)]]</Select>
+  </Query>
+  <!--41: Unexpected Shutdown or Bluescreen-->
+  <Query Id="27" Path="System">
+    <Select Path="System">*[System[Provider[@Name="Microsoft-Windows-Kernel-Power"] and (EventID=41)]]</Select>
+  </Query>
+  <!--1074: Shutdown initiate request-->
+  <Query Id="28" Path="System">
+    <Select Path="System">*[System[Provider[@Name="User32"] and (EventID=1074)]]</Select>
+  </Query>
+  <!--1: Arbitrary Code Guard Auditing-->
+  <!--2: Arbitrary Code Guard Enforcement-->
+  <!--3: Child Process Creation Auditing-->
+  <!--4: Child Process Creation Enforcement-->
+  <!--5: Low Integrity Image Load Auditing-->
+  <!--6: Low Integrity Image Load Enforcement-->
+  <!--7: Remote Image Loads Auditing-->
+  <!--8: Remote Image Loads Enforcement-->
+  <!--9: Audit the use of Win32K System Call Table-->
+  <!--10: Prevent the use of Win32K System Call Table-->
+  <!--11: A non-Microsoft-signed binary would have been loaded-->
+  <!--12: A Non-Microsoft-signed binary was prevented from loading-->
+  <Query Id="29" Path="Microsoft-Windows-Security-Mitigations/KernelMode">
+    <Select Path="Microsoft-Windows-Security-Mitigations/KernelMode">*[System[Provider[@Name="Microsoft-Windows-Security-Mitigations"] and (EventID=1 or EventID=2 or EventID=3 or EventID=4 or EventID=5 or EventID=6 or EventID=7 or EventID=8 or EventID=9 or EventID=10 or EventID=11 or EventID=12)]]</Select>
+  </Query>
+  <!--13: Process would have been blocked from accessing the Export Address Table for module-->
+  <!--14: Process was blocked from accessing the Export Address Table for module-->
+  <!--15: Process would have been blocked from accessing the Export Address Table for module-->
+  <!--16: Process was blocked from accessing the Export Address Table for module-->
+  <!--17: Process would have been blocked from accessing the import Address Table for API-->
+  <!--18: Process was blocked from accessing the Import Address Table for API-->
+  <!--19: Process would have been blocked from calling the API due to ROP exploit indications-->
+  <!--20: Process was blocked from calling the API due to ROP exploit indications-->
+  <!--21: Process would have been blocked from calling the API due to ROP exploit indications-->
+  <!--22: Process was blocked from calling the API due to ROP exploit indications-->
+  <!--23: Process would have been blocked from calling the API due to ROP exploit indications-->
+  <!--24: Process was blocked from calling the API due to ROP exploit indications-->
+  <Query Id="30" Path="Microsoft-Windows-Security-Mitigations/UserMode">
+    <Select Path="Microsoft-Windows-Security-Mitigations/UserMode">*[System[Provider[@Name="Microsoft-Windows-Security-Mitigations"] and (EventID=13 or EventID=14 or EventID=15 or EventID=16 or EventID=17 or EventID=18 or EventID=19 or EventID=20 or EventID=21 or EventID=22 or EventID=23 or EventID=24)]]</Select>
+  </Query>
+  <!--5: Control Flow Guard Violation-->
+  <Query Id="31" Path="System">
+    <Select Path="System">*[System[Provider[@Name="Microsoft-Windows-WER-Diag"] and (EventID=5)]]</Select>
+  </Query>
+  <!--1006: Malware detected-->
+  <!--1007: Malware removal action taken-->
+  <!--1008: Action on malware failed-->
+  <!--1009: Restored file from quarantine-->
+  <!--1010: Failed to remove item from quarantine-->
+  <!--1116: Malware detected-->
+  <!--1117: Malware removal action taken-->
+  <!--1118: Malware removal action taken with non-critical error-->
+  <Query Id="32" Path="Microsoft-Windows-Windows Defender/Operational">
+    <Select Path="Microsoft-Windows-Windows Defender/Operational">*[System[Provider[@Name="Microsoft-Windows-Windows Defender"] and (EventID=1006 or EventID=1007 or EventID=1008 or EventID=1009 or EventID=1010 or EventID=1116 or EventID=1117 or EventID=1118)]]</Select>
+  </Query>
+  <!--1119: Malware removal action attempted with critical error-->
+  <!--1121: Attack Surface Reduction rule fired in Block-Mode-->
+  <!--1122: Attack Surface Reduction rule fired in Audit-Mode-->
+  <!--1123: Blocked Controlled Folder Access-->
+  <!--1124: Audited Controlled Folder Access-->
+  <!--1125: Network Protection fires in Audit-mode-->
+  <!--1126: Network Protection fires in Block-mode-->
+  <!--5007: Attack Surface Reduction, Controlled Folder Access or Network Protection settings changed-->
+  <Query Id="33" Path="Microsoft-Windows-Windows Defender/Operational">
+    <Select Path="Microsoft-Windows-Windows Defender/Operational">*[System[Provider[@Name="Microsoft-Windows-Windows Defender"] and (EventID=1119 or EventID=1121 or EventID=1122 or EventID=1123 or EventID=1124 or EventID=1125 or EventID=1126 or EventID=5007)]]</Select>
+  </Query>
+</QueryList>
+
+        ]]>
+    </Query>
+
+    <ReadExistingEvents>true</ReadExistingEvents>
+    <TransportName>http</TransportName>
+    <ContentFormat>RenderedText</ContentFormat>
+    <Locale Language="en-US"/>
+    <LogFile>ForwardedEvents</LogFile>
+    <AllowedSourceNonDomainComputers></AllowedSourceNonDomainComputers>
+    <AllowedSourceDomainComputers>O:NSG:NSD:(A;;GA;;;DC)(A;;GA;;;NS)(A;;GA;;;DD)</AllowedSourceDomainComputers>
+</Subscription>
