@@ -602,7 +602,7 @@ WEF/WEC using the steps we laid out at the start of this page. If after followin
 to configure WEF/WEC no events are being forwarded to the Event Collector execute the
 `gpupdate /force` command on the forwarding system. Afterwards inspect the events 
 generated inside the `Eventlog-ForwardingPlugin/Operational` channel. When the event in the
-image below is generated make sure step 4 is executed successfully on the Event Collector.
+image below is generated make sure step 5 is executed successfully on the Event Collector.
 Don't forget to reboot the Event Collector afterwards. Otherwise the changes aren't
 effective.
 
