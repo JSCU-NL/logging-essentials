@@ -1065,7 +1065,7 @@
                     "level": "Information",
                     "channel": "Microsoft-Windows-WMI-Activity/Operational",
                     "provider": "Microsoft-Windows-WMI-Activity",
-                    "notes": "A WMI query error has occured"
+                    "notes": "A WMI query error has occurred"
                 }
             },
             "Temporary WMI event subscription created": {
