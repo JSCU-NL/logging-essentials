@@ -111,20 +111,21 @@ also discuss several trade-offs related to configuring these timers as well as p
 profiles which can be used. 
 
 ==== Refresh
-Compared to the other parameters the Refresh parameter is the
+This parameter defines how often a client needs to contact the Event Collector for updates
+to the subscription. The Event Collector responds with a list of subscriptions applicable
+to the client. Compared to the other parameters the Refresh parameter is the
 only parameter which isn't defined within the subscription. Instead this parameter is defined
-in the `Configure target Subscription Manager` GPO-setting. This value is appended to
-the same string which defines the Event Collector URL. As separation character a `,`
-comma is being used. For example if we want to configure the Refresh parameter on 60
-seconds, `Server=http://collector.example.com:5985/wsman/SubscriptionManager/WEC`
-becomes the following.
+in the following GPO-setting:
+
+`Computer Configuration -> Administrative Templates -> Windows Components -> Event Forwarding -> Configure Target Subscription Manager`
+
+The refresh rate is appended to
+the same string which defines the Event Collector URL, separated by a comma. For example if we want to configure a refresh rate of 60 seconds we would set the GPO-value to: 
+
 ```
 Server=http://collector.example.com:5985/wsman/SubscriptionManager/WEC,Refresh=60
 ```
-This parameter defines how often a client needs to contact the Event Collector for updates
-to the subscription. The Event Collector responds with a list of subscriptions applicable
-to the client. By default the Refresh parameter is configured to `900 seconds` which
-is the same as 15 minutes. Microsoft recommends to adjust this parameter based on the
+By default the Refresh parameter is set to 900 seconds or 15 minutes. Microsoft recommends to adjust this parameter based on the
 frequency in which you apply changes to subscriptions. If subscriptions don't change
 frequently this parameter should be configured in the range of hours
 footnoteref:[wec-performance].
@@ -286,7 +287,7 @@ attack surface of a system. Please see Microsoft's webpage on security considera
 PowerShell Remoting in order to gain an understanding of the security impact
 footnote:[https://docs.microsoft.com/en-us/powershell/scripting/learn/remoting/winrmsecurity].
 
-In order to verify that PowerShell remoting is enabled we execute the command below on
+In order to verify that PowerShell Remoting is enabled we execute the command below on
 a workstation (`WS01`). Invoke-Command executes the `hostname` command on our Event Collector
 (`EC01`). 
 ```
@@ -312,6 +313,8 @@ In order to access the event log on the Event Collector (`EC01`), the `NETWORK S
 account which is used by WinRM needs to be a member of the local `Event Log Readers` group. 
 This is accomplished by configuring the GPO below and applying it to the computer account
 of the Event Collector (`EC01`).
+
+`Computer Configuration -> Policies -> Windows Settings -> Security Settings -> Restricted Groups`
 
 ifndef::env-github[]
 image::collector_gpo.png[align="center"]
@@ -343,13 +346,19 @@ endif::[]
 
 In step 1 we already warned about the impact of enabling PowerShell Remoting. To reduce the
 attack surface we configure the `Allow remote server management through WinRM` option. This
-option allows one to specify from which IP-addresses to accept WS-Management traffic. In our
-environment we only want to accept traffic from the local network which has the `10.0.10.0/24`
-subnet configured. Inside the `IPv4 filter` option we specify `10.0.10.1-10.0.10.254` as value.
-It's not possible to specify networks in CDIR-format. Multiple IP-ranges can be specified 
-by separating each range by a comma (`,`). Using the `IPv6 filter` option allowed ranges can
-be specified for WS-Management traffic using IPv6. In our case we don't use IPv6 so we leave
-this option empty. This results in denying any WS-Management traffic over IPv6.
+option specifies on which IP-addresses to listen for WS-Management traffic. 
+
+[IMPORTANT]
+.Source address filtering
+Note that the aforementioned option doesn't specify which IP-addresses are allowed to connect to a specific
+WinRM instance. Firewall rules are required to limit the source IP-addresses that can connect to the WinRM instance.
+
+You must specify a range of IP-addresses, even if you want to listen for WS-Management traffic on just one IP-address. In our case the IP-address of our Event Collector is `10.0.10.100`.
+This results in the following range: `10.0.10.100-10.0.10.101`. Multiple ranges can be
+specified by separating each range using a comma (`,`). 
+
+The `IPv6 filter` works in much the same way allowing you to specify on which IPv6-addresses we want to listen for WS-Management traffic. In our case we don't use IPv6 
+so we leave this option empty. This results in not listening for WS-Management traffic over IPv6.
 
 === Step 4: Configure Forwarded Events Log
 Eventually we configure the Event Collector to store the forwarded events into the `Forwarded
@@ -450,7 +459,10 @@ On each client we recommend the following maximum log sizes for specific Windows
 * **System** - 1048576 KB (1 GB)
 
 Compared to the default maximum log sizes this allows for extended log retention on the
-client systems. The image below shows the GPO-settings which should be configured. 
+client systems. The image below shows the GPO-settings which should be configured. For
+readability we only include the `Computer Configuration` part of the GPO. All of the
+configuration activities during this step take place inside this aforementioned part
+of the GPO. 
 Furthermore, this GPO should be scoped on the computer accounts from which you want
 to receive events.
 
@@ -623,5 +635,27 @@ When importing the subscription in step 8 the error below is generated.
 Failed to open subscription. Error = 0x6ba.
 The RPC server is unavailable.
 ```
-This error is caused due to the fact that the Event Collector service isn't active on the
+This error could be caused due to the fact that the Event Collector service isn't active on the
 Event Collector. Make sure the Event Collector service is started and execute step 8 again.
+Another possibility could be that the Event Collector's IP-address on which you want to accept
+forwarded events isn't listening on WS-Management traffic. This can be determined by executing the
+command below on the Event Collector.
+```
+winrm e winrm/config/listener
+```
+This results in an output similar to the example output below.
+```
+Listener [Source="GPO"]
+    Address = *
+    Transport = HTTP
+    Port = 5985
+    Hostname
+    Enabled = true
+    URLPrefix = wsman
+    CertificateThumbprint
+    ListeningOn = 10.0.10.101
+```
+In our case the `ListeningOn` attribute is equal to `10.0.10.101`. If the IP-address on which you want
+to receive forwarded events isn't listed under this attribute or the value is equal to `null` please review
+step 3 again. The ranges configured under the `Allow remote server management through WinRM` option should
+include the IP-address which you want to use for event collection.

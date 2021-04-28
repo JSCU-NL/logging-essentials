@@ -12,7 +12,7 @@ endif::[]
 :toc-title:
 
 == Overview
-The table below provides an overview of the events further described in section Recommended Configurations. From left to right the table contains the event category, a short summary of what the category entails and an estimate of the volume you can expect during collection.
+The table below provides an overview of the events further described in section <<Recommendations>>. From left to right the table contains the event category, a short summary of what the category entails and an estimate of the volume you can expect during collection.
 
 [cols="1,1,0"]
 |===
