@@ -208,7 +208,7 @@
     <Select Path="Microsoft-Windows-Win32k/Operational">*[System[Provider[@Name="Microsoft-Windows-Win32k"] and (EventID=260)]]</Select>
   </Query>
   <!--5857: A WMI provider was loaded-->
-  <!--5858: A WMI query error has occured-->
+  <!--5858: A WMI query error has occurred-->
   <!--5860: A temporary WMI event subscription has been created-->
   <!--5861: A permanent WMI event subscription has been created-->
   <Query Id="23" Path="Microsoft-Windows-WMI-Activity/Operational">
