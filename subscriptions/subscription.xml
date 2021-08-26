@@ -1,6 +1,6 @@
 <Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
     <SubscriptionId>default</SubscriptionId>
-    <Description>default subscription based on json mapping</Description>
+    <Description>Default subscription based on json mapping</Description>
     <SubscriptionType>SourceInitiated</SubscriptionType>
     <Enabled>true</Enabled>
     <Uri>http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog</Uri>
@@ -235,6 +235,40 @@
   <Query Id="28" Path="System">
     <Select Path="System">*[System[Provider[@Name="User32"] and (EventID=1074)]]</Select>
   </Query>
+  <!--0: Sysmon Service Status Changed-->
+  <!--1: Process creation-->
+  <!--2: A process changed a file creation time-->
+  <!--3: Network connection-->
+  <!--4: Sysmon service state changed-->
+  <!--5: Process terminated-->
+  <!--6: Driver loaded-->
+  <!--7: Image loaded-->
+  <!--8: CreateRemoteThread-->
+  <!--9: RawAccessRead-->
+  <!--10: ProcessAccess-->
+  <!--11: FileCreate-->
+  <!--12: RegisteryEvent (Object create and Delete)-->
+  <!--13: RegisteryEvent value set-->
+  <Query Id="29" Path="Microsoft-Windows-Sysmon/Operational">
+    <Select Path="Microsoft-Windows-Sysmon/Operational">*[System[Provider[@Name="Microsoft-Windows-Sysmon"] and (EventID=0 or EventID=1 or EventID=2 or EventID=3 or EventID=4 or EventID=5 or EventID=6 or EventID=7 or EventID=8 or EventID=9 or EventID=10 or EventID=11 or EventID=12 or EventID=13)]]</Select>
+  </Query>
+  <!--14: RegisteryEvent key and value rename-->
+  <!--15: FileCreateStreamHash-->
+  <!--16: ServiceConfigurationChange-->
+  <!--17: PipeEvent pipe created-->
+  <!--18: PipeEvent pipe connected-->
+  <!--19: WMIEvent WMIEvenFilter activity detected-->
+  <!--20: WMIEvent Consumer activity detected-->
+  <!--21: WMIEvent Consumer to filter activity detected-->
+  <!--22: DNSEvent DNS Query-->
+  <!--23: FileDelete a file delete was detected-->
+  <!--24: ClipboardChange new content in clipboard-->
+  <!--25: ProcessTampering process image change-->
+  <!--26: File Delete Detected-->
+  <!--255: Sysmon error-->
+  <Query Id="30" Path="Microsoft-Windows-Sysmon/Operational">
+    <Select Path="Microsoft-Windows-Sysmon/Operational">*[System[Provider[@Name="Microsoft-Windows-Sysmon"] and (EventID=14 or EventID=15 or EventID=16 or EventID=17 or EventID=18 or EventID=19 or EventID=20 or EventID=21 or EventID=22 or EventID=23 or EventID=24 or EventID=25 or EventID=26 or EventID=255)]]</Select>
+  </Query>
   <!--1: Arbitrary Code Guard Auditing-->
   <!--2: Arbitrary Code Guard Enforcement-->
   <!--3: Child Process Creation Auditing-->
@@ -247,7 +281,7 @@
   <!--10: Prevent the use of Win32K System Call Table-->
   <!--11: A non-Microsoft-signed binary would have been loaded-->
   <!--12: A Non-Microsoft-signed binary was prevented from loading-->
-  <Query Id="29" Path="Microsoft-Windows-Security-Mitigations/KernelMode">
+  <Query Id="31" Path="Microsoft-Windows-Security-Mitigations/KernelMode">
     <Select Path="Microsoft-Windows-Security-Mitigations/KernelMode">*[System[Provider[@Name="Microsoft-Windows-Security-Mitigations"] and (EventID=1 or EventID=2 or EventID=3 or EventID=4 or EventID=5 or EventID=6 or EventID=7 or EventID=8 or EventID=9 or EventID=10 or EventID=11 or EventID=12)]]</Select>
   </Query>
   <!--13: Process would have been blocked from accessing the Export Address Table for module-->
@@ -262,11 +296,11 @@
   <!--22: Process was blocked from calling the API due to ROP exploit indications-->
   <!--23: Process would have been blocked from calling the API due to ROP exploit indications-->
   <!--24: Process was blocked from calling the API due to ROP exploit indications-->
-  <Query Id="30" Path="Microsoft-Windows-Security-Mitigations/UserMode">
+  <Query Id="32" Path="Microsoft-Windows-Security-Mitigations/UserMode">
     <Select Path="Microsoft-Windows-Security-Mitigations/UserMode">*[System[Provider[@Name="Microsoft-Windows-Security-Mitigations"] and (EventID=13 or EventID=14 or EventID=15 or EventID=16 or EventID=17 or EventID=18 or EventID=19 or EventID=20 or EventID=21 or EventID=22 or EventID=23 or EventID=24)]]</Select>
   </Query>
   <!--5: Control Flow Guard Violation-->
-  <Query Id="31" Path="System">
+  <Query Id="33" Path="System">
     <Select Path="System">*[System[Provider[@Name="Microsoft-Windows-WER-Diag"] and (EventID=5)]]</Select>
   </Query>
   <!--1006: Malware detected-->
@@ -277,7 +311,7 @@
   <!--1116: Malware detected-->
   <!--1117: Malware removal action taken-->
   <!--1118: Malware removal action taken with non-critical error-->
-  <Query Id="32" Path="Microsoft-Windows-Windows Defender/Operational">
+  <Query Id="34" Path="Microsoft-Windows-Windows Defender/Operational">
     <Select Path="Microsoft-Windows-Windows Defender/Operational">*[System[Provider[@Name="Microsoft-Windows-Windows Defender"] and (EventID=1006 or EventID=1007 or EventID=1008 or EventID=1009 or EventID=1010 or EventID=1116 or EventID=1117 or EventID=1118)]]</Select>
   </Query>
   <!--1119: Malware removal action attempted with critical error-->
@@ -288,7 +322,7 @@
   <!--1125: Network Protection fires in Audit-mode-->
   <!--1126: Network Protection fires in Block-mode-->
   <!--5007: Attack Surface Reduction, Controlled Folder Access or Network Protection settings changed-->
-  <Query Id="33" Path="Microsoft-Windows-Windows Defender/Operational">
+  <Query Id="35" Path="Microsoft-Windows-Windows Defender/Operational">
     <Select Path="Microsoft-Windows-Windows Defender/Operational">*[System[Provider[@Name="Microsoft-Windows-Windows Defender"] and (EventID=1119 or EventID=1121 or EventID=1122 or EventID=1123 or EventID=1124 or EventID=1125 or EventID=1126 or EventID=5007)]]</Select>
   </Query>
 </QueryList>

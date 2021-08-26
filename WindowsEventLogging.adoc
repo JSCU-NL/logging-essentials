@@ -24,6 +24,7 @@ The table below provides an overview of the events further described in section 
 | Network Activity (<<network-activity-policy, policy>>, <<network-activity-default,default>>) | Network activity on the host which wasn't included in other categories, e.g. DHCP leases, DNS, Remote Desktop use and BITS jobs. | Low
 | Scheduled Tasks (<<scheduled-tasks-policy, policy>>, <<scheduled-tasks-default, default>>) | Records the creation and modification of Scheduled Tasks. | Low
 | <<Services>> |  Records the creation and modification of services. | Low
+| <<System Monitor (Sysmon), Sysmon>> | Provides additional detection capabilities such as information about process creations, network activity, loading of drivers and more. | Depends on rule sets
 | <<System Security Extension>> | Records the loading of extension packages such as Security Support Providers (SSP) or Password Filters into the Local Security Authority (LSA) process. | Low
 | <<System Status>> | Records startup and shutdown of systems. Records application crashes and hangs. | Low
 | <<Object Access>> | Records access to network shares and objects that have system access control lists (SACL) specified. | High
@@ -107,20 +108,22 @@ Some organizations have guidelines or policies in place to limit the use of exte
 The events described here are aimed at providing additional context during analysis such as having a history of DHCP leases or domain names that may have been resolved in the past.
 
 ===== Address Assignment (DHCP)
-Records the assignment of IP addresses to interfaces. This information can be useful during analysis to determine which IP address was assigned to a system at some point in time. For these events to be available the DHCP-Client channel must be enabled. You can configure a Registry Key that enables the channel domain-wide using Group Policies.
+Records the assignment of IP addresses to interfaces. This information can be useful during analysis to determine which IP address was assigned to a system at some point in time. 
 
-`Computer Configuration -> Preferences -> Windows Settings -> Registry -> New -> Registry Item`
+For these events to be available the DHCP-Client and DHCPv6-Client channel must be enabled. There are multiple ways these channels can be enabled but we found that using PowerShell provides the most reliable result.
 
-DHCPv4: `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Dhcp-Client/Operational`
+[source,powershell]
+----
+$logs = Get-WinEvent -ListLog "Microsoft-Windows-Dhcp*-Client/Operational"
+Foreach($log in $logs) {
+    $log.IsEnabled = $true
+    $log.MaximumSizeInBytes = $10MB
+    $log.SaveChanges()
+}
+----
 
-DHCPv6: `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Dhcpv6-Client/Operational`
+You should distribute these commands across your domain according to your company's deployment strategy using elevated privileges. Deployment using configuration management software is preferred. Alternatively you can use something like an apply once scheduled task using group policiesfootnote:[https://www.faqforge.com/windows-server-2016/configure-scheduled-task-item-using-group-policy/].
 
-[cols="1,1,1,1"]
-|===
-| Value Name | Value Type | Value data |  Configure for
-
-| Enabled | REG_DWORD | 1 | All
-|===
 
 ===== Name Resolution (DNS)
 Malware may attempt to resolve domain names for the retrieval of additional files or communicating with Command & Control servers. Collecting DNS queries can be helpful in order to enable the discovery of compromise or intrusion during analysis.
@@ -329,6 +332,10 @@ In addition to the <<Scheduled Tasks, Object Access>> policy, events in the dedi
 ==== Services
 Records failures and crashes of Windows Services. The installation of new services is tracked by <<System Security Extension>>.
 
+==== System Monitor (Sysmon)
+Microsoft Sysmon provides additional detection capabilities, based on a user-specified configuration. If you have Sysmon configured in your environment, you should add the events to your collection strategy. If you are using our default subscription file, the events are already included.
+
+Our current advice does not cover the deployment or configuration of Sysmon. If you have deployed Sysmon, you should tweak your configuration for your environment to prevent spamming of events.
 
 ==== System Status
 Events in this category include: startup and shutdown of a system, application crashes and modifications to the system time. Tracking the startup and shutdown events of a system can provide additional context during analysis. Unstable or crashing applications may be an indication of malicious activity or exploitation attempts.
@@ -398,6 +405,29 @@ This table can be used to configure your central collection.
 | Microsoft-Windows-Security-Mitigations/UserMode| Microsoft-Windows-Security-Mitigations | 22 | True
 | Microsoft-Windows-Security-Mitigations/UserMode| Microsoft-Windows-Security-Mitigations | 23 | True
 | Microsoft-Windows-Security-Mitigations/UserMode| Microsoft-Windows-Security-Mitigations | 24 | True
+| Microsoft-Windows-Sysmon/Operational| Microsoft-Windows-Sysmon | 0 | True
+| Microsoft-Windows-Sysmon/Operational| Microsoft-Windows-Sysmon | 1 | True
+| Microsoft-Windows-Sysmon/Operational| Microsoft-Windows-Sysmon | 2 | True
+| Microsoft-Windows-Sysmon/Operational| Microsoft-Windows-Sysmon | 3 | True
+| Microsoft-Windows-Sysmon/Operational| Microsoft-Windows-Sysmon | 4 | True
+| Microsoft-Windows-Sysmon/Operational| Microsoft-Windows-Sysmon | 5 | True
+| Microsoft-Windows-Sysmon/Operational| Microsoft-Windows-Sysmon | 6 | True
+| Microsoft-Windows-Sysmon/Operational| Microsoft-Windows-Sysmon | 7 | True
+| Microsoft-Windows-Sysmon/Operational| Microsoft-Windows-Sysmon | 8 | True
+| Microsoft-Windows-Sysmon/Operational| Microsoft-Windows-Sysmon | 9 | True
+| Microsoft-Windows-Sysmon/Operational| Microsoft-Windows-Sysmon | 10 | True
+| Microsoft-Windows-Sysmon/Operational| Microsoft-Windows-Sysmon | 11 | True
+| Microsoft-Windows-Sysmon/Operational| Microsoft-Windows-Sysmon | 14 | True
+| Microsoft-Windows-Sysmon/Operational| Microsoft-Windows-Sysmon | 15 | True
+| Microsoft-Windows-Sysmon/Operational| Microsoft-Windows-Sysmon | 16 | True
+| Microsoft-Windows-Sysmon/Operational| Microsoft-Windows-Sysmon | 18 | True
+| Microsoft-Windows-Sysmon/Operational| Microsoft-Windows-Sysmon | 21 | True
+| Microsoft-Windows-Sysmon/Operational| Microsoft-Windows-Sysmon | 22 | True
+| Microsoft-Windows-Sysmon/Operational| Microsoft-Windows-Sysmon | 23 | True
+| Microsoft-Windows-Sysmon/Operational| Microsoft-Windows-Sysmon | 24 | True
+| Microsoft-Windows-Sysmon/Operational| Microsoft-Windows-Sysmon | 25 | True
+| Microsoft-Windows-Sysmon/Operational| Microsoft-Windows-Sysmon | 26 | True
+| Microsoft-Windows-Sysmon/Operational| Microsoft-Windows-Sysmon | 255 | True
 | Microsoft-Windows-TaskScheduler/Operational| Microsoft-Windows-TaskScheduler | 200 | True
 | Microsoft-Windows-TaskScheduler/Operational| Microsoft-Windows-TaskScheduler | 201 | True
 | Microsoft-Windows-TerminalServices-RDPClient/Operational| Microsoft-Windows-TerminalServices-ClientActiveXCore | 1024 | True
@@ -525,5 +555,6 @@ This table can be used to configure your central collection.
 | System| User32 | 1074 | True
 
 |===
+
 
 
