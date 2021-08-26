@@ -1154,6 +1154,234 @@
             }
         }
     },
+    "Microsoft Sysmon": {
+        "events":{
+            "Sysmon Service Status Changed ": {
+                "0": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "Sysmon Service Status Changed"
+                }
+            },
+            "Process creation": {
+                "1": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "Process creation"
+                }
+            },
+            "Process changed file creation time": {
+                "2": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "A process changed a file creation time"
+                }
+            },
+            "Network connection": {
+                "3": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "Network connection"
+                }
+            },
+            "Sysmon service state changed": {
+                "4": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "Sysmon service state changed"
+                }
+            },
+            "Process terminated": {
+                "5": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "Process terminated"
+                }
+            },
+            "Driver loaded": {
+                "6": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "Driver loaded"
+                }
+            },
+            "Image loaded": {
+                "7": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "Image loaded"
+                }
+            },
+            "Create Remote Thread": {
+                "8": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "CreateRemoteThread"
+                }
+            },
+            "Raw Access Read": {
+                "9": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "RawAccessRead"
+                }
+            },
+            "Process Access": {
+                "10": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "ProcessAccess"
+                }
+            },
+            "File Create": {
+                "11": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "FileCreate"
+                }
+            },
+            "Registry Create/Delete": {
+                "12": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "RegisteryEvent (Object create and Delete)"
+                }
+            },
+            "Registry Value Set": {
+                "13": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "RegisteryEvent value set"
+                }
+            },
+            "Registry Key/Value Rename": {
+                "14": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "RegisteryEvent key and value rename"
+                }
+            },
+            "File Create Stream Hash": {
+                "15": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "FileCreateStreamHash"
+                }
+            },
+            "Service Configuration Change": {
+                "16": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "ServiceConfigurationChange"
+                }
+            },
+            "Pipe Created": {
+                "17": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "PipeEvent pipe created"
+                }
+            },
+            "Pipe Connected": {
+                "18": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "PipeEvent pipe connected"
+                }
+            },
+            "WMI Filter Activity": {
+                "19": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "WMIEvent WMIEvenFilter activity detected"
+                }
+            },
+            "WMI Consumer Activity": {
+                "20": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "WMIEvent Consumer activity detected"
+                }
+            },
+            "WMI Consumer to Filter Activity": {
+                "21": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "WMIEvent Consumer to filter activity detected"
+                }
+            },
+            "DNS Query": {
+                "22": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "DNSEvent DNS Query"
+                }
+            },
+            "File Delete": {
+                "23": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "FileDelete a file delete was detected"
+                }
+            },
+            "Clipboard Change": {
+                "24": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "ClipboardChange new content in clipboard"
+                }
+            },
+            "Process Tampering": {
+                "25": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "ProcessTampering process image change"
+                }
+            },
+            "File Delete Detected": {
+                "26": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "File Delete Detected"
+                }
+            },
+            "Error": {
+                "255": {
+                    "level": "Information",
+                    "channel": "Microsoft-Windows-Sysmon/Operational",
+                    "provider": "Microsoft-Windows-Sysmon",
+                    "notes": "Sysmon error"
+                }
+            }
+        }
+    },
     "Windows Defender": {
         "events": {
             "ACG Audit": {
